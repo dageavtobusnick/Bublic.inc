@@ -8,13 +8,6 @@ public class ExitController : MonoBehaviour
 
         var currentRoom = gameObject.GetComponentInParent<RoomProperties>();
         GameController.CurrentRoom = currentRoom;
-    }
-    
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Player") || collision.isTrigger) return;
-
-        var currentRoom = gameObject.GetComponentInParent<RoomProperties>();
         currentRoom.CloseExits();
         var ai = currentRoom.GetComponentsInChildren<IAttacker>();
         if (ai != null)
@@ -22,5 +15,12 @@ public class ExitController : MonoBehaviour
                 foreach (var x in ai) x.Attack();
             else
                 foreach (var x in ai) x.StopAttack();
+    }
+    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player") || collision.isTrigger) return;
+
+        var currentRoom = gameObject.GetComponentInParent<RoomProperties>();
     }
 }

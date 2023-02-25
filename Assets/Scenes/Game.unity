@@ -927,14 +927,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ce86d83a071ee49bb074e487459814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WithRepetitions: 0
-  RoomsCount: 12
-  RoomsDensity: 4
-  BossSpawnDelay: 1
-  AstarPath: {fileID: 416381125}
-  BossRoom: {fileID: 4822536661245823284, guid: f7597abf680778b4687968e27c5ea871, type: 3}
-  ShopRoom: {fileID: 993279460741580353, guid: 2c2ff88ebb71f2c4b8bafc771ff12c2d, type: 3}
-  RoomsPrefabs:
+  _withRepetitions: 0
+  _roomsCount: 12
+  _roomsDensity: 4
+  _bossSpawnDelay: 1
+  _astarPath: {fileID: 416381125}
+  _bossRoom: {fileID: 4822536661245823284, guid: f7597abf680778b4687968e27c5ea871, type: 3}
+  _shopRoom: {fileID: 993279460741580353, guid: 2c2ff88ebb71f2c4b8bafc771ff12c2d, type: 3}
+  _roomsPrefabs:
   - {fileID: 4775367763622412229, guid: 62035ea45df93fc4c9e62a9e5537da1b, type: 3}
   - {fileID: 2056128660655614085, guid: f5325815d8cf5f841a25720902a3f17a, type: 3}
   - {fileID: 5613451579417198142, guid: 0e8ecf42baa15c944b81ad0e145245e1, type: 3}
@@ -947,8 +947,8 @@ MonoBehaviour:
   - {fileID: 6901415512645258803, guid: 919ac25b82f3faa418aaec6198b4e7cf, type: 3}
   - {fileID: 30310379584779109, guid: b7f44852963c1f143a6c1484a4d4bd94, type: 3}
   - {fileID: 8992657206619919096, guid: 1f59aba87bbfa2440b605974e76a8c1f, type: 3}
-  LeftConnection: {fileID: 612248389032828558, guid: 69913bb43fccb3a4a916b91c31f9ecf1, type: 3}
-  RightConnection: {fileID: 1432570714763670303, guid: 5dcf2a7101673574abbc7c1cdc425dc6, type: 3}
+  _leftConnection: {fileID: 612248389032828558, guid: 69913bb43fccb3a4a916b91c31f9ecf1, type: 3}
+  _rightConnection: {fileID: 1432570714763670303, guid: 5dcf2a7101673574abbc7c1cdc425dc6, type: 3}
 --- !u!114 &1323187307
 MonoBehaviour:
   m_ObjectHideFlags: 0

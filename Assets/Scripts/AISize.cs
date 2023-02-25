@@ -2,5 +2,8 @@ using UnityEngine;
 
 public class AISize : MonoBehaviour
 {
-    public int size;
+    [SerializeField]
+    private int _size;
+
+    public int Size { get => _size; set => _size = value; }
 }

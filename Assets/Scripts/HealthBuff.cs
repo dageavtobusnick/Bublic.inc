@@ -7,7 +7,7 @@ public class HealthBuff : MonoBehaviour, IModuleEffect
 
     private HPBar _playerHealth;
 
-    public void Start()
+    public void Awake()
     {
         _playerHealth = GetComponent<HPBar>();
     }
