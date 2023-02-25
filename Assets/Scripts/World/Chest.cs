@@ -1,43 +1,45 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public List<GameObject> Weapons;
-    private BoxCollider2D Collider;
-    public GameObject Canvas;
-    private bool IsClose = true;
+    [SerializeField]
+    private List<GameObject> _weapons;
+    [SerializeField]
+    private GameObject _canvas;
+
+    private bool _isClose = true;
+    private PlayerInputActions _actions;
+
+    private void Start()
+    {
+        _actions = GameController.PlayerInputActions;
+    }
+
     public void DropWeapon()
     {
-        GameObject weapon = Instantiate(Weapons[Random.Range(0, Weapons.Count)], transform.position, Quaternion.identity) ;
+        GameObject weapon = Instantiate(_weapons[Random.Range(0, _weapons.Count)], transform.position, Quaternion.identity) ;
         weapon.transform.position = new Vector3(transform.position.x, transform.position.y - 0.9f, transform.position.z);
-
     }
 
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-      
-        if (Input.GetKey(KeyCode.E) && collision.tag =="Player" && IsClose)
+        if (_actions.IsTryCollect && TryGetComponent<PlayerController>(out var _) && _isClose)
         {
-            IsClose = false;
+            _isClose = false;
             DropWeapon();
-            Canvas.SetActive(false);
+            _canvas.SetActive(false);
         }
-    }
-    private void Update()
-    {
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsClose)
-            Canvas.SetActive(true);
+        if (_isClose)
+            _canvas.SetActive(true);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Canvas.SetActive(false);
+        _canvas.SetActive(false);
     }
 
 }

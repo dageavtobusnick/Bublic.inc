@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6235763505809254730}
   - component: {fileID: 436246132484577035}
   - component: {fileID: -485002844124982252}
+  - component: {fileID: 8362730317224237381}
   m_Layer: 0
   m_Name: SpeedModule2
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,6 +48,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -99,12 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryItem:
-    id: 10
-    mainObject: {fileID: 2673632070281621268}
-    icon: {fileID: 21300000, guid: 0f6b646218dce9d46a138c3c65fe2b3a, type: 3}
-    isModule: 1
-    isWeapon: 0
-    isHeal: 0
+    Id: 10
+    MainObject: {fileID: 2673632070281621268}
+    Icon: {fileID: 21300000, guid: 0f6b646218dce9d46a138c3c65fe2b3a, type: 3}
 --- !u!114 &6235763505809254730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,9 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ebe4aa14909b74d80022043d0dde25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TripletModule: {fileID: 0}
-  IsInRange: 0
-  IsPicked: 0
+  _tripletModule: {fileID: 0}
 --- !u!114 &436246132484577035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48042df38ed434f43abe23e134094f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedIncrease: 4
+  _speedIncrease: 4
 --- !u!114 &-485002844124982252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,8 +143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702734aad0cf4694a84da61eb056d47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  amp: 0.05
-  freq: 2
-  offset: 0
-  isPicked: 0
+  _amp: 0.05
+  _freq: 2
+--- !u!114 &8362730317224237381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673632070281621268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbff01fc6202b449ad3c6f000cf4057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

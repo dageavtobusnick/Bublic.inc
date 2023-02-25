@@ -1,20 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponStats : MonoBehaviour
 {
-    public int Damage;
-    public float ReloadTime;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int _damage;
+    [SerializeField]
+    private float _reloadTime;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int Damage { get => _damage; }
+    public float ReloadTime { get => _reloadTime; }
 }

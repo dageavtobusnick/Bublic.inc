@@ -78,11 +78,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookRight
+  - m_ConditionMode: 3
+    m_ConditionEvent: dX
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookDown
+  - m_ConditionMode: 4
+    m_ConditionEvent: dY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6015818155410506934}
@@ -302,6 +302,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: dY
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: dX
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -415,11 +427,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookUp
+  - m_ConditionMode: 3
+    m_ConditionEvent: dX
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookRight
+  - m_ConditionMode: 3
+    m_ConditionEvent: dY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7482475171934796124}
@@ -513,11 +525,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookLeft
+  - m_ConditionMode: 4
+    m_ConditionEvent: dX
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookUp
+  - m_ConditionMode: 3
+    m_ConditionEvent: dY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7182612288299219730}
@@ -607,11 +619,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookDown
+  - m_ConditionMode: 4
+    m_ConditionEvent: dY
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: LookLeft
+  - m_ConditionMode: 4
+    m_ConditionEvent: dX
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5511164016771762392}

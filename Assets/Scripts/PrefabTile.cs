@@ -2,17 +2,15 @@
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu]
-public class PrefabTile : UnityEngine.Tilemaps.TileBase
+public class PrefabTile : TileBase
 {
-    public Sprite Sprite; //The sprite of tile in the palette
-    public GameObject Prefab; //The gameobject to spawn
+    public Sprite Sprite;
+    public GameObject Prefab;
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        // Assign variables
         if (!Application.isPlaying) tileData.sprite = Sprite;
         else tileData.sprite = null;
-
         if (Prefab) tileData.gameObject = Prefab;
     }
 

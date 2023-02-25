@@ -1,33 +1,43 @@
 using UnityEngine;
+using System.Collections.Generic;
 
+
+[RequireComponent(typeof(IDamagable))]
 public class VaseScript : MonoBehaviour
 {
-    public System.Collections.Generic.List<GameObject> Loot;
-    public System.Collections.Generic.List<int> LootChances;
+    [System.Serializable]
+    public class LootChances
+    {
+        public GameObject Loot;
+        public int Chance;
+    }
+    [SerializeField]
+    private List<LootChances> _lootChances;
 
-    private Animator animator;
-    private CapsuleCollider2D collider;
+    private Animator _animator;
+    private CapsuleCollider2D _capsuleCollider;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        collider = GetComponent<CapsuleCollider2D>();
+        _animator = GetComponent<Animator>();
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
+        GetComponent<IDamagable>().Dead += Break;
     }
 
     public void Break()
     {
         var rand = Random.Range(0 + GameController.LuckBonus, 100 - GameController.LuckBonus * 2);
 
-        for (int i = 0; i < LootChances.Count; i++)
-            if (rand < LootChances[i])
+        for (int i = 0; i < _lootChances.Count; i++)
+            if (rand < _lootChances[i].Chance)
             {
-                Instantiate(Loot[i],
+                Instantiate(_lootChances[i].Loot,
                             new Vector3(transform.position.x, transform.position.y - 0.25f, 4),
                             Quaternion.identity);
                 break;
             }
 
-        collider.enabled = false;
-        animator.SetTrigger("Broke");
+        _capsuleCollider.enabled = false;
+        _animator.SetTrigger("Broke");
     }
 }

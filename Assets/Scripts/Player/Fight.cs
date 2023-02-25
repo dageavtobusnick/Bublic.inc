@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fight : MonoBehaviour
 {
-	public Transform attackPosition;
-	public float attackRadius;
-	public MeleeWeapon currentMeleeWeapon;
+	private Transform _attackPosition;
+	private float _attackRadius;
     private void OnDrawGizmosSelected()
     {
 		Gizmos.color = Color.red;
-		Gizmos.DrawSphere(attackPosition.position, attackRadius);
+		Gizmos.DrawSphere(_attackPosition.position, _attackRadius);
     }
 }

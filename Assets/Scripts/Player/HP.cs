@@ -1,83 +1,71 @@
+using System;
 using UnityEngine;
 
-public class HP : MonoBehaviour
+[RequireComponent(typeof(GUIBar))]
+[RequireComponent(typeof(ColorController))]
+public class HP : MonoBehaviour,IDamagable,IEntity
 {
-    public int _currentHP;
-    public int _maxHP;
-    public float InvFrames;
-    private float _currentInvTime;
+    [SerializeField]
+    private int _maxHP;
+    [SerializeField]
+    private int _teamId;
+    [SerializeField]
+    private AudioClip _damageSound;
 
-    public SpriteRenderer EnemySprite;
-    public Color textColor = Color.white;
-    public float textHeight = 0.8f;
-    public Color shadowColor = new Color(0, 0, 0, 0.5f);
-    public Vector2 shadowOffset = new Vector2(1, 1);
-    public AudioClip damageSound;
-    GUIStyle style = new GUIStyle();
+    private bool _canBeDamaged=true;
+    private int _currentHP;
+    private AudioSource _playerAudioSource;
+
+    public event Action Dead;
+    public event Action Damaged;
+    public event Action<float> HPChanged;
+
+    public int CurrentHp { get => _currentHP; }
+
+    public int MaxHp { get => _maxHP; }
+    public int TeamId { get => _teamId; }
 
     private void Start()
     {
-        EnemySprite = GetComponent<SpriteRenderer>();
-    }
-
-    void OnGUI()
-    {
-        GUI.depth = 9999;
-
-        style.normal.textColor = textColor;
-
-        Vector3 worldPosition = new Vector3(transform.position.x, transform.position.y + textHeight, transform.position.z);
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-        screenPosition.y = Screen.height - screenPosition.y;
-
-        GUI.Label(new Rect(screenPosition.x, screenPosition.y, 0, 0), _currentHP.ToString(), style);
-    }
-
-    private void FixedUpdate()
-    {
-        if (_currentInvTime > 0)
+        _currentHP = _maxHP;
+        _playerAudioSource = GetComponent<AudioSource>();
+        GetComponent<ColorController>().NotInv += () =>
         {
-            _currentInvTime -= Time.fixedDeltaTime;
-
-            if (_currentInvTime <= 0f)
-            {
-                _currentInvTime = 0f;
-                EnemySprite.color = Color.white;
-            }
-        }
+            _canBeDamaged = true;
+        };
     }
 
-    public void TakeDamage(int damage)
-    {
-        if (_currentInvTime == 0f)
-        {
-            _currentInvTime = InvFrames;
-            if (CompareTag("Enemy"))
-                EnemySprite.color = Color.red;
-            _currentHP -= damage;
-            gameObject.GetComponent<AudioSource>().PlayOneShot(damageSound);
-            if (_currentHP <= 0)
-                Die();
-        }
-    }
 
     public void Heal(int heal)
     {
         _currentHP += heal;
         if (_currentHP > _maxHP)
             _currentHP = _maxHP;
+        HPChanged.Invoke(_currentHP);
     }
 
     public void Die()
     {
-        if (CompareTag("Enemy"))
+        Dead?.Invoke();
+    }
+
+    public void TakeDamage(int teamId, int damage)
+    {
+        if (_canBeDamaged&&teamId!=_teamId)
         {
-            GameController.CurrentRoom.RemoveEnemy(gameObject);
-            Destroy(gameObject);
+            _currentHP -= damage;
+            _playerAudioSource.PlayOneShot(_damageSound);
+            Damaged?.Invoke();
+            HPChanged?.Invoke(_currentHP);
+            if (_currentHP <= 0)
+                Die();
+            _canBeDamaged=false;
         }
-        else if (CompareTag("Destroyable"))
-        {
-            GetComponent<VaseScript>().Break();
-        }
+    }
+
+    public void InitHealth(int hp)
+    {
+        _maxHP = hp;
+        _currentHP = hp;
     }
 }

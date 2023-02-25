@@ -1,34 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SecondStageController : MonoBehaviour
 {
-    private bool IsStarted=false;
-    public GameObject boss;
-    public int damageInPersent;
-    // Update is called once per frame
+    [SerializeField]
+    private GameObject _boss;
+    [SerializeField]
+    private int _damageInPersent;
+
+    private bool _isStarted=false;
+    private HP _hP;
+
+    private void Start()
+    {
+        _hP=_boss.GetComponent<HP>();
+    }
+
     public void StartStage()
     {
-        IsStarted = true;
+        _isStarted = true;
     }
-    void Update()
+    void FixedUpdate()
     {
-        if (IsStarted)
+        if (_isStarted)
         {
-            var flyes = gameObject.GetComponentsInChildren<EnemyLogic>();
+            var flyes = gameObject.GetComponentsInChildren<IAttacker>();
             if (flyes.Length == 0)
             {
-                IsStarted = false;
-                boss.SetActive(true);
-                var HP = boss.GetComponent<HP>();
-                HP.TakeDamage((HP._maxHP * damageInPersent) / 100);
+                _isStarted = false;
+                _boss.SetActive(true);
+                _hP.TakeDamage(GameController.VirtualTeamId,_hP.MaxHp * _damageInPersent / 100);
             }
             else
             {
                 foreach(var e in flyes)
                 {
-                    e.Atack();
+                    e.Attack();
                 }
             }
         }

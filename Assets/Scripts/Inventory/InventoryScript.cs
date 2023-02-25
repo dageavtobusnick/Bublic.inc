@@ -1,284 +1,121 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
-    [SerializeField] public Sprite[] itemBase;//Тестировочное полее, впоследствии изчезнет
-    private InventoryItem[,] matrix;
-    [SerializeField] public List<GameObject> IconBases;
-    private InventoryItem weaponSlot;
-    [SerializeField] public List<GameObject> savedIconBases;
-    private InventoryItem[] moduleSlots;
-    private InventoryItem movingItem;
+    [SerializeField]
+    private List<InventoryItemScript> _modules;
+    [SerializeField]
+    private List<InventoryItemScript> _fastSlots;
+    [SerializeField]
+    private InventoryItemScript _weapon;
 
-    private Dictionary<string, int> modulesCounts;
+
+    private List<InventoryItemScript> _inventoryItems;
+
 
     void Start()
     {
-        moduleSlots = new InventoryItem[3];
-        matrix = new InventoryItem[4, 4];
+        _inventoryItems = FindObjectsOfType<InventoryItemScript>().ToList();
+        _inventoryItems.Remove(_weapon);
+        foreach (var e in _modules)
+        {
+            _inventoryItems.Remove(e);
+            e.Equip += OnModuleEquiped;
+        }
     }
 
-    public bool isMoving()
+    public void OnModuleEquiped(ItemScript module)
     {
-        return movingItem != null;
+        if(TryCraftTripable(out var tripable))
+        {
+            foreach(var e in _modules)
+            {
+                Destroy(e.RemoveItem().gameObject);
+            }
+            var newObject=Instantiate(tripable,GameController.Player.transform).GetComponent<ItemScript>();
+            newObject.GetComponent<IPickable>().PickUp();
+        }
+
+    }
+
+    public bool TryCraftTripable(out ItemScript tripable)
+    {
+        var firstItem= _modules[0].Item;
+        tripable = null;
+        foreach(var e in _modules)
+        {
+            if (firstItem?.InventoryItem?.Id != e.Item?.InventoryItem?.Id)
+                return false;
+        }
+        tripable = firstItem.GetComponent<ModuleScript>().TripletModule;
+        return tripable!=null;
     }
 
     public void Use(int number)
     {
-        var item = matrix[0, number];
-        if (item != null)
+        var from = _fastSlots[number];
+        EquipModuleInFreeSlot(from);
+        EquipWeapon(from);
+        Heal(from);
+    }
+
+    private void Heal(InventoryItemScript from)
+    {
+        if(from.Item!=null&&from.Item.TryGetComponent<HealScript>(out var heal))
         {
-            if (item.isWeapon)
-            {
-                if (weaponSlot == null)
-                {
-                    weaponSlot = item;
-                    matrix[0, number] = null;
-                    UpdateInv();
-                }
-                else
-                {
-                    var buffer = weaponSlot;
-                    weaponSlot = item;
-                    matrix[0, number] = buffer;
-                    buffer.mainObject.SetActive(false);
-                    UpdateInv();
-                }
-                item.mainObject.SetActive(true);
-                GameController.Player.GetComponent<PlayerController>().Weapon = item.mainObject.GetComponent<MeleeWeapon>();
-            }
-            if (item.isHeal)
-            {
-                if (item.mainObject != null)
-                {
-                    var heal = item.mainObject.GetComponent<HealScript>();
-                    if (heal != null)
-                    {
-                        heal.Heal();
-                        matrix[0, number] = null;
-                    }
-                }
-            }
+            heal.Heal();
+            from.RemoveItem();
+            Destroy(heal);
         }
     }
 
-    public void CollectItem(GameObject gameObject)
+    public void EquipWeapon(InventoryItemScript from)
     {
-        if (gameObject != null)
-        {
-            var item = gameObject.GetComponent<ItemScript>();
-            if (item != null)
+        if(from.IsWeapon())
+            from.AddItem(_weapon.Replace(from.RemoveItem()));
+    }
+
+    private void EquipModule(InventoryItemScript from,InventoryItemScript to)
+    {
+        from.AddItem(to.Replace(from.RemoveItem()));
+    }
+    public void EquipModuleInFreeSlot(InventoryItemScript from)
+    {
+        if(from.IsModule())
+            foreach(var e in _modules)
             {
-                if (item.InventoryItem != null)
+                if(e.IsEmpty)
                 {
-                    AddItem(item.InventoryItem);
+                    EquipModule(from, e);
                 }
             }
-            item.transform.SetParent(GameController.Player.transform);
-            item.transform.position.Set(0, 0, 4);
-            item.gameObject.SetActive(false);
-        }
     }
-
-    public void StartMoveItem(InventoryItem Item)
+    public void AddItem(ItemScript itemScript)
     {
-        movingItem = Item;
-    }
-
-    public void EndMoveItem()
-    {
-        movingItem = null;
-        UpdateInv();
-    }
-
-    public void MoveToWeaponSlot()
-    {
-        RemoveMoved();
-        weaponSlot = movingItem;
-        movingItem.mainObject.SetActive(true);
-        GameController.Player.GetComponent<PlayerController>().Weapon = movingItem.mainObject.GetComponent<MeleeWeapon>();
-    }
-
-    public void MoveToModuleSlot(int i)
-    {
-        RemoveMoved();
-        moduleSlots[i] = movingItem;
-        movingItem.mainObject.GetComponent<ModuleScript>().Activate(true);
-    }
-
-    public void MoveToInv(int i,int j)
-    {
-        RemoveMoved();
-        matrix[i, j] = movingItem;
-        UpdateInv();
-    }
-
-    private void RemoveMoved()
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
+        foreach(var e in _inventoryItems)
         {
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            if (e.IsEmpty)
             {
-                if (matrix[i, j] == movingItem)
-                {
-                    matrix[i, j] = null;
-                    return;
-                }
-            }
-        }
-
-        if (weaponSlot == movingItem)
-        {
-            weaponSlot = null;
-            movingItem.mainObject.SetActive(false);
-        }
-
-        for (var i = 0; i < moduleSlots.Length; i++)
-        {
-            if (moduleSlots[i] == movingItem)
-            {
-                moduleSlots[i] = null;
-                movingItem.mainObject.GetComponent<ModuleScript>().Activate(false);
-            }
-        }
-    }
-
-    public bool AddItem(InventoryItem inventoryItem)
-    {
-        var isFound = false;
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            if (isFound)
+                e.AddItem(itemScript);
                 break;
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                if (matrix[i, j] == null)
-                {
-                    isFound = true;
-                    matrix[i, j] = inventoryItem;
-                    break;
-                }
-            }
-        }
-
-        UpdateInv();
-        return isFound;
-    }
-
-    public void UpdateInv()
-    {
-        IconBases = savedIconBases.ToList();
-        IconBases.ForEach(x => x.SetActive(false));
-
-        var modulesCountsTemp = new Dictionary<string, int>(); 
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                if (matrix[i, j] != null)
-                {
-                    var item = matrix[i, j];
-
-                    if (item.isModule)
-                        if (!modulesCountsTemp.ContainsKey(item.mainObject.name))
-                            modulesCountsTemp.Add(item.mainObject.name, 1);
-                        else
-                            modulesCountsTemp[item.mainObject.name]++;
-
-                    var slotPosition = GameObject.Find($"{i} {j}").GetComponent<RectTransform>();
-                    var icon = IconBases.Last();
-                    IconBases.Remove(icon);
-                    icon.SetActive(true);
-                    icon.GetComponent<RectTransform>().anchoredPosition = slotPosition.anchoredPosition;
-                    icon.GetComponent<Image>().sprite = item.icon;
-                    icon.GetComponent<InventoryItemScript>().inventoryItem = item;
-                }
-            }
-        }
-
-        modulesCounts = modulesCountsTemp;
-
-        foreach (var module in modulesCounts.Keys)
-        {
-            if (modulesCounts[module] == 3)
-            {
-                GameObject upgradedModule = null;
-
-                for (int i = 0; i < matrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < matrix.GetLength(1); j++)
-                    {
-                        var item = matrix[i, j];
-
-                        if (item != null && item.isModule && item.mainObject.name == module)
-                        {
-                            matrix[i, j] = null;
-
-                            if (!upgradedModule)
-                                upgradedModule = item.mainObject;
-                        }
-                    }
-                }
-
-                var triplet = upgradedModule.GetComponent<ModuleScript>().TripletModule;
-                if (triplet)
-                {
-                    triplet = Instantiate(triplet);
-                    triplet.GetComponent<ModuleScript>().CollectModule();
-                }
-            }
-        }
-
-        if (weaponSlot != null)
-        {
-            var slotPosition = GameObject.Find($"WeaponSlot").GetComponent<RectTransform>();
-            var icon = IconBases.Last();
-            IconBases.Remove(icon);
-            icon.SetActive(true);
-            icon.GetComponent<RectTransform>().anchoredPosition = slotPosition.anchoredPosition;
-            icon.GetComponent<Image>().sprite = weaponSlot.icon;
-            icon.GetComponent<InventoryItemScript>().inventoryItem = weaponSlot;
-        }
-
-        for (var i = 0; i < moduleSlots.Length; i++)
-        {
-            if (moduleSlots[i] != null)
-            {
-                var slotPosition = GameObject.Find($"{i}").GetComponent<RectTransform>();
-                var icon = IconBases.Last();
-                IconBases.Remove(icon);
-                icon.SetActive(true);
-                icon.GetComponent<RectTransform>().anchoredPosition = slotPosition.anchoredPosition;
-                icon.GetComponent<Image>().sprite = moduleSlots[i].icon;
-                icon.GetComponent<InventoryItemScript>().inventoryItem = moduleSlots[i];
             }
         }
     }
-}
 
-[System.Serializable]
-public class InventoryItem
-{
-    public int id;
-    public GameObject mainObject;
-    public Sprite icon;
-    public bool isModule=false;
-    public bool isWeapon = false;
-    public bool isHeal = false;
-    public InventoryItem(GameObject mainObject,int id,Sprite icon,bool isModule,bool isWeapon,bool isHeal)
+    public void CollectItem(GameObject itemObject)
     {
-        this.mainObject = mainObject;
-        this.id = id;
-        this.icon = icon;
-        this.isModule = isModule;
-        this.isWeapon = isWeapon;
-        this.isHeal = isHeal;
+        if (itemObject != null)
+        {
+            if (itemObject.TryGetComponent<ItemScript>(out var item))
+            {
+                AddItem(item);
+                item.transform.SetParent(GameController.Player.transform);
+                item.transform.position.Set(0, 0, 4);
+                item.gameObject.SetActive(false);
+            }
+        }
     }
 }
 

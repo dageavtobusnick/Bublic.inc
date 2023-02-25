@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5759887118908339040}
   - component: {fileID: 6311001846740152589}
-  - component: {fileID: 2013491966581493859}
-  - component: {fileID: 235949826384307672}
+  - component: {fileID: 7364705471255665056}
   m_Layer: 0
   m_Name: lasergun11
   m_TagString: Untagged
@@ -29,6 +28,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.99660957, w: 0.0822763}
   m_LocalPosition: {x: -0.9912068, y: 0.13232186, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 10
@@ -44,6 +44,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2013491966581493859
+--- !u!114 &7364705471255665056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,30 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 32214250580525842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 5759887118908339040}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &235949826384307672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32214250580525842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &233560373690096545
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,8 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1361387621402426318}
   - component: {fileID: 5382233039320840266}
-  - component: {fileID: 4891408855784336925}
-  - component: {fileID: 1755816747460483727}
+  - component: {fileID: 4012202188855691114}
   m_Layer: 0
   m_Name: lasergun9
   m_TagString: Untagged
@@ -146,6 +128,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.05987928, w: -0.99820566}
   m_LocalPosition: {x: 0.99233174, y: 0.12360304, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 8
@@ -161,6 +144,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -201,7 +185,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4891408855784336925
+--- !u!114 &4012202188855691114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,30 +194,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 233560373690096545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1361387621402426318}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &1755816747460483727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233560373690096545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &300310602663847902
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,8 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1498071367688728306}
   - component: {fileID: 1471429295691769186}
-  - component: {fileID: 625613115404711573}
-  - component: {fileID: 9211342987760440708}
+  - component: {fileID: 5858204829873951796}
   m_Layer: 0
   m_Name: lasergun3
   m_TagString: Untagged
@@ -263,6 +228,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9889447, w: 0.14828503}
   m_LocalPosition: {x: -0.9672506, y: 0.25382337, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 2
@@ -278,6 +244,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -318,7 +285,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &625613115404711573
+--- !u!114 &5858204829873951796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,30 +294,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 300310602663847902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1498071367688728306}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &9211342987760440708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300310602663847902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &604380801738949922
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,8 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4888584763750947381}
   - component: {fileID: 628491872264257639}
-  - component: {fileID: 8444288086178776777}
-  - component: {fileID: 6021510415357637098}
+  - component: {fileID: 7991324415316809725}
   m_Layer: 0
   m_Name: lasergun7
   m_TagString: Untagged
@@ -380,6 +328,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9195637, w: 0.39294103}
   m_LocalPosition: {x: -0.7179851, y: 0.6960585, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 6
@@ -395,6 +344,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -435,7 +385,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8444288086178776777
+--- !u!114 &7991324415316809725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,30 +394,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 604380801738949922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 4888584763750947381}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &6021510415357637098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604380801738949922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &662895695312046106
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +426,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.48, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 8
@@ -508,8 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027984474037026532}
   - component: {fileID: 6555094881591000025}
-  - component: {fileID: 2675218322295118979}
-  - component: {fileID: 4868145285655195624}
+  - component: {fileID: 3355210105102305699}
   m_Layer: 0
   m_Name: lasergun11
   m_TagString: Untagged
@@ -527,6 +459,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.974035, w: 0.22639756}
   m_LocalPosition: {x: -0.9147302, y: -0.40406522, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 10
@@ -542,6 +475,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -582,7 +516,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2675218322295118979
+--- !u!114 &3355210105102305699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,30 +525,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 713656478694476540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 2027984474037026532}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &4868145285655195624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713656478694476540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &1031894799096353559
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,8 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6630919462979710240}
   - component: {fileID: 818403374608423263}
-  - component: {fileID: 7738939622332655094}
-  - component: {fileID: 7733136499665595877}
+  - component: {fileID: 358631185364774920}
   m_Layer: 0
   m_Name: lasergun6
   m_TagString: Untagged
@@ -644,6 +559,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.89616054, w: -0.44372997}
   m_LocalPosition: {x: -0.5984601, y: -0.80115265, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 5
@@ -659,6 +575,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -699,7 +616,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7738939622332655094
+--- !u!114 &358631185364774920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -708,30 +625,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1031894799096353559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 6630919462979710240}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &7733136499665595877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031894799096353559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &1333207683600541231
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +660,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 0
@@ -776,6 +676,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -844,7 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dd9dd169918ef428f087dd8ea0de38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  _damage: 5
+  _teamId: 1
 --- !u!1 &1828436853158491685
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,8 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1375743830461903244}
   - component: {fileID: 7703709938374516665}
-  - component: {fileID: 4100488189520192291}
-  - component: {fileID: 3868111164942705785}
+  - component: {fileID: 4567932854907658169}
   m_Layer: 0
   m_Name: lasergun4
   m_TagString: Untagged
@@ -874,6 +775,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.6363916, w: -0.7713661}
   m_LocalPosition: {x: 0.18912943, y: -0.9819522, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 3
@@ -889,6 +791,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -929,7 +832,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4100488189520192291
+--- !u!114 &4567932854907658169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -938,30 +841,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1828436853158491685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1375743830461903244}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &3868111164942705785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828436853158491685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &1916948309520601658
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +874,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1431384827479364392}
   - {fileID: 4973281390322261627}
@@ -1016,7 +902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaf9f22c95556e4fbba335fbcf524dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootCount: 15
 --- !u!1 &1940174407724356389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,8 +912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431384827479364392}
   - component: {fileID: 5749224306843747372}
-  - component: {fileID: 2520815279347033565}
-  - component: {fileID: 9141835063170311623}
+  - component: {fileID: 7769049995262773798}
   m_Layer: 0
   m_Name: lasergun1
   m_TagString: Untagged
@@ -1046,6 +930,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 0
@@ -1061,6 +946,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1101,7 +987,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2520815279347033565
+--- !u!114 &7769049995262773798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1110,30 +996,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1940174407724356389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1431384827479364392}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &9141835063170311623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940174407724356389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &1971144828902693757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,8 +1012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6140229757830806269}
   - component: {fileID: 9120186935763798318}
-  - component: {fileID: 4238106581413308024}
-  - component: {fileID: 8456654592979167269}
+  - component: {fileID: 7102640294435202443}
   m_Layer: 0
   m_Name: lasergun3
   m_TagString: Untagged
@@ -1163,6 +1030,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.18189442, w: 0.9833181}
   m_LocalPosition: {x: 0.9496777, y: 0.3132288, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 2
@@ -1178,6 +1046,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1218,7 +1087,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4238106581413308024
+--- !u!114 &7102640294435202443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1227,30 +1096,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1971144828902693757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 6140229757830806269}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8456654592979167269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971144828902693757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &2301997067306712827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,8 +1112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6218042045063184178}
   - component: {fileID: 1414457506758095986}
-  - component: {fileID: 1998018622198764571}
-  - component: {fileID: 5883136983715263673}
+  - component: {fileID: 5272247111351693767}
   m_Layer: 0
   m_Name: lasergun2
   m_TagString: Untagged
@@ -1280,6 +1130,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.24929537, w: 0.96842754}
   m_LocalPosition: {x: 0.8532201, y: -0.521551, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 1
@@ -1295,6 +1146,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1335,7 +1187,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1998018622198764571
+--- !u!114 &5272247111351693767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1344,30 +1196,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2301997067306712827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 6218042045063184178}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &5883136983715263673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2301997067306712827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &2346862836959877434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1228,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 7
@@ -1408,8 +1243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 231783884607329154}
   - component: {fileID: 3378216606106328616}
-  - component: {fileID: 8759665071809136424}
-  - component: {fileID: 6396397861229973971}
+  - component: {fileID: 1278553984800880256}
   m_Layer: 0
   m_Name: lasergun8
   m_TagString: Untagged
@@ -1427,6 +1261,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.8231252, w: 0.56786}
   m_LocalPosition: {x: -0.31740013, y: -0.9482917, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 7
@@ -1442,6 +1277,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1482,7 +1318,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8759665071809136424
+--- !u!114 &1278553984800880256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1491,30 +1327,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2418643430577722474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 231783884607329154}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &6396397861229973971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2418643430577722474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &2587687333351283590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,8 +1343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7464354370957406947}
   - component: {fileID: 5725033689462990797}
-  - component: {fileID: 4584475979185210409}
-  - component: {fileID: 4478013535980327962}
+  - component: {fileID: 3194489073043427883}
   m_Layer: 0
   m_Name: lasergun9
   m_TagString: Untagged
@@ -1544,6 +1361,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.49739596, w: -0.86752367}
   m_LocalPosition: {x: 0.51779556, y: -0.8555044, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 8
@@ -1559,6 +1377,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1599,7 +1418,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4584475979185210409
+--- !u!114 &3194489073043427883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1608,30 +1427,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2587687333351283590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 7464354370957406947}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &4478013535980327962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2587687333351283590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &2789198440800759065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,8 +1443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4973281390322261627}
   - component: {fileID: 2399290577157289796}
-  - component: {fileID: 8084664526651987841}
-  - component: {fileID: 8993028604783967601}
+  - component: {fileID: 7654893824251116208}
   m_Layer: 0
   m_Name: lasergun2
   m_TagString: Untagged
@@ -1661,6 +1461,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.7594913, w: 0.6505175}
   m_LocalPosition: {x: -0.12796369, y: -0.99177885, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 1
@@ -1676,6 +1477,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1716,7 +1518,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8084664526651987841
+--- !u!114 &7654893824251116208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1725,30 +1527,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2789198440800759065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 4973281390322261627}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8993028604783967601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2789198440800759065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &2877420155739589370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1559,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.32, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 10
@@ -1789,8 +1574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 252609337448142801}
   - component: {fileID: 8252033194763227984}
-  - component: {fileID: 2364446727052545736}
-  - component: {fileID: 4560937242620798317}
+  - component: {fileID: 3034637252631380557}
   m_Layer: 0
   m_Name: lasergun4
   m_TagString: Untagged
@@ -1808,6 +1592,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.91719973, w: 0.39842764}
   m_LocalPosition: {x: -0.6928958, y: 0.7210377, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 3
@@ -1823,6 +1608,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1863,7 +1649,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2364446727052545736
+--- !u!114 &3034637252631380557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1872,30 +1658,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120733245372526118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 252609337448142801}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &4560937242620798317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120733245372526118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &3131731118737149936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,8 +1674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4100384729435308185}
   - component: {fileID: 5955743929722727143}
-  - component: {fileID: 6848798441026428975}
-  - component: {fileID: 4098548819576770560}
+  - component: {fileID: 6890690096450975919}
   m_Layer: 0
   m_Name: lasergun2
   m_TagString: Untagged
@@ -1925,6 +1692,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.8259037, w: 0.5638112}
   m_LocalPosition: {x: -0.43217793, y: 0.90178835, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 1
@@ -1940,6 +1708,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1980,7 +1749,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6848798441026428975
+--- !u!114 &6890690096450975919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1989,30 +1758,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3131731118737149936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 4100384729435308185}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &4098548819576770560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131731118737149936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &3383142418733839684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,8 +1774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8784037547445034049}
   - component: {fileID: 4129898137852923778}
-  - component: {fileID: 7123978333194739518}
-  - component: {fileID: 382886149897205126}
+  - component: {fileID: 2908062458036462609}
   m_Layer: 0
   m_Name: lasergun7
   m_TagString: Untagged
@@ -2042,6 +1792,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9821738, w: -0.18797544}
   m_LocalPosition: {x: -0.9284601, y: -0.3714321, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 6
@@ -2057,6 +1808,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2097,7 +1849,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7123978333194739518
+--- !u!114 &2908062458036462609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2106,30 +1858,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3383142418733839684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 8784037547445034049}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &382886149897205126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383142418733839684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &3522810249549877430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +1890,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.48, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 6
@@ -2170,8 +1905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8144475900686584107}
   - component: {fileID: 276592867650950582}
-  - component: {fileID: 7143172253893909257}
-  - component: {fileID: 8475499398206996481}
+  - component: {fileID: 6355492592039620538}
   m_Layer: 0
   m_Name: lasergun7
   m_TagString: Untagged
@@ -2189,6 +1923,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.09275008, w: -0.99568945}
   m_LocalPosition: {x: 0.98111135, y: -0.1934438, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 6
@@ -2204,6 +1939,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2244,7 +1980,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7143172253893909257
+--- !u!114 &6355492592039620538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2253,30 +1989,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3540831958577913246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 8144475900686584107}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8475499398206996481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3540831958577913246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4073400566486338917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,8 +2005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979243974023785797}
   - component: {fileID: 7928268796576388854}
-  - component: {fileID: 7199856258106732406}
-  - component: {fileID: 505579938588874840}
+  - component: {fileID: 940752631811308324}
   m_Layer: 0
   m_Name: lasergun5
   m_TagString: Untagged
@@ -2306,6 +2023,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.29127398, w: 0.95663965}
   m_LocalPosition: {x: 0.8037755, y: 0.5949328, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 4
@@ -2321,6 +2039,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2361,7 +2080,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7199856258106732406
+--- !u!114 &940752631811308324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2370,30 +2089,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4073400566486338917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1979243974023785797}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &505579938588874840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4073400566486338917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4150910982780862757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,8 +2105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4908016028181572231}
   - component: {fileID: 659627118346730934}
-  - component: {fileID: 1541883640294159648}
-  - component: {fileID: 8463949312464297769}
+  - component: {fileID: 187130312938885301}
   m_Layer: 0
   m_Name: lasergun3
   m_TagString: Untagged
@@ -2423,6 +2123,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.8968968, w: -0.44223997}
   m_LocalPosition: {x: -0.62644446, y: -0.7794661, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 2
@@ -2438,6 +2139,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2478,7 +2180,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1541883640294159648
+--- !u!114 &187130312938885301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2487,30 +2189,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4150910982780862757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 4908016028181572231}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8463949312464297769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4150910982780862757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4174745866397799784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2521,8 +2205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4819984164236455720}
   - component: {fileID: 1770116724996481319}
-  - component: {fileID: 7375919228975903861}
-  - component: {fileID: 8021564578132945184}
+  - component: {fileID: 1029985250537600809}
   m_Layer: 0
   m_Name: lasergun5
   m_TagString: Untagged
@@ -2540,6 +2223,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.25217965, w: -0.9676804}
   m_LocalPosition: {x: 0.8711474, y: -0.4910216, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 4
@@ -2555,6 +2239,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2595,7 +2280,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7375919228975903861
+--- !u!114 &1029985250537600809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2604,30 +2289,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4174745866397799784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 4819984164236455720}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8021564578132945184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174745866397799784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4273239975808700705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,8 +2305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668006083255806420}
   - component: {fileID: 221185640595315953}
-  - component: {fileID: 6962691207362205135}
-  - component: {fileID: 950020642816661837}
+  - component: {fileID: 3087591727324962852}
   m_Layer: 0
   m_Name: lasergun6
   m_TagString: Untagged
@@ -2657,6 +2323,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.6865228, w: 0.7271083}
   m_LocalPosition: {x: 0.06630686, y: 0.9977993, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 5
@@ -2672,6 +2339,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2712,7 +2380,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6962691207362205135
+--- !u!114 &3087591727324962852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2721,30 +2389,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4273239975808700705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 668006083255806420}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &950020642816661837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273239975808700705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4570369033928093287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,8 +2405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5927575296282734092}
   - component: {fileID: 6690254768379775785}
-  - component: {fileID: 7949552373176317726}
-  - component: {fileID: 7288134896776531447}
+  - component: {fileID: 8078975944029863243}
   m_Layer: 0
   m_Name: lasergun1
   m_TagString: Untagged
@@ -2774,6 +2423,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9589088, w: -0.28371456}
   m_LocalPosition: {x: -0.8390715, y: -0.5440211, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 0
@@ -2789,6 +2439,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2829,7 +2480,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7949552373176317726
+--- !u!114 &8078975944029863243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2838,30 +2489,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4570369033928093287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 5927575296282734092}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &7288134896776531447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4570369033928093287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4705451355523269148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,6 +2521,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 4
@@ -2918,6 +2552,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4, y: -0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 11
@@ -2932,8 +2567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7100475962584840386}
   - component: {fileID: 2551687021330516258}
-  - component: {fileID: 3830353123238530020}
-  - component: {fileID: 5826999562594676453}
+  - component: {fileID: 376868273674836383}
   m_Layer: 0
   m_Name: lasergun4
   m_TagString: Untagged
@@ -2951,6 +2585,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.5608007, w: 0.8279508}
   m_LocalPosition: {x: 0.3755096, y: 0.9268185, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 3
@@ -2966,6 +2601,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3006,7 +2642,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3830353123238530020
+--- !u!114 &376868273674836383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3015,30 +2651,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4935706959067460503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 7100475962584840386}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &5826999562594676453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935706959067460503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &4963337277324036690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,8 +2667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7690895584246287092}
   - component: {fileID: 7617372590970587005}
-  - component: {fileID: 2340401770038582056}
-  - component: {fileID: 6054878060056657501}
+  - component: {fileID: 4759406142912105587}
   m_Layer: 0
   m_Name: lasergun10
   m_TagString: Untagged
@@ -3068,6 +2685,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.79621834, w: 0.6050094}
   m_LocalPosition: {x: -0.28369108, y: 0.9589157, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 9
@@ -3083,6 +2701,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3123,7 +2742,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2340401770038582056
+--- !u!114 &4759406142912105587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3132,30 +2751,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4963337277324036690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 7690895584246287092}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &6054878060056657501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4963337277324036690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &5664914934598355044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,8 +2767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249843030675988017}
   - component: {fileID: 405787600134931476}
-  - component: {fileID: 8410184993600858308}
-  - component: {fileID: 6595005796470860539}
+  - component: {fileID: 8732881219992814450}
   m_Layer: 0
   m_Name: lasergun1
   m_TagString: Untagged
@@ -3185,6 +2785,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.5431741, w: 0.8396202}
   m_LocalPosition: {x: 0.40808207, y: 0.9129453, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 0
@@ -3200,6 +2801,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3240,7 +2842,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8410184993600858308
+--- !u!114 &8732881219992814450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3249,30 +2851,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5664914934598355044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 249843030675988017}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &6595005796470860539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664914934598355044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &5755184600668178929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3283,8 +2867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796157368944144898}
   - component: {fileID: 7734928247583121240}
-  - component: {fileID: 8904251317514876152}
-  - component: {fileID: 1689282185183060678}
+  - component: {fileID: 5104977610024844091}
   m_Layer: 0
   m_Name: lasergun10
   m_TagString: Untagged
@@ -3302,6 +2885,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.47810653, w: -0.8783019}
   m_LocalPosition: {x: 0.54770404, y: 0.8366721, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 9
@@ -3317,6 +2901,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3357,7 +2942,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8904251317514876152
+--- !u!114 &5104977610024844091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3366,30 +2951,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5755184600668178929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1796157368944144898}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &1689282185183060678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5755184600668178929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &5877530693981757300
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,8 +2967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5445228032976495081}
   - component: {fileID: 1883014417928643821}
-  - component: {fileID: 7727160886618835779}
-  - component: {fileID: 7470377772620195028}
+  - component: {fileID: 858737834899874328}
   m_Layer: 0
   m_Name: lasergun6
   m_TagString: Untagged
@@ -3419,6 +2985,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.5007483, w: -0.86559296}
   m_LocalPosition: {x: 0.48718768, y: -0.8732973, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 5
@@ -3434,6 +3001,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3474,7 +3042,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7727160886618835779
+--- !u!114 &858737834899874328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3483,30 +3051,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5877530693981757300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 5445228032976495081}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &7470377772620195028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5877530693981757300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &6210513886899255202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3517,8 +3067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698764975923717282}
   - component: {fileID: 1567888631326902490}
-  - component: {fileID: 5394988574907295683}
-  - component: {fileID: 6340037774348021721}
+  - component: {fileID: 2974881269161332127}
   m_Layer: 0
   m_Name: lasergun5
   m_TagString: Untagged
@@ -3536,6 +3085,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9992636, w: -0.038370393}
   m_LocalPosition: {x: -0.9980811, y: -0.061920337, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 4
@@ -3551,6 +3101,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3591,7 +3142,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5394988574907295683
+--- !u!114 &2974881269161332127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3600,30 +3151,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6210513886899255202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1698764975923717282}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &6340037774348021721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210513886899255202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &6363033712398807804
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,8 +3167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1691984786716263042}
   - component: {fileID: 6429733285685203922}
-  - component: {fileID: 1722584523239154848}
-  - component: {fileID: 2447622211427447152}
+  - component: {fileID: 1664671575769853985}
   m_Layer: 0
   m_Name: lasergun8
   m_TagString: Untagged
@@ -3653,6 +3185,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.34500012, w: 0.9386026}
   m_LocalPosition: {x: 0.78221214, y: 0.6230122, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2409420818984360980}
   m_RootOrder: 7
@@ -3668,6 +3201,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3708,7 +3242,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1722584523239154848
+--- !u!114 &1664671575769853985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3717,30 +3251,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6363033712398807804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1691984786716263042}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &2447622211427447152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363033712398807804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &6552388929423493540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,6 +3284,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5927575296282734092}
   - {fileID: 4100384729435308185}
@@ -3795,7 +3312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaf9f22c95556e4fbba335fbcf524dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootCount: 15
 --- !u!1 &6552850454695334286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3822,6 +3338,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.36, y: 0.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 9
@@ -3836,8 +3353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8196575000261846867}
   - component: {fileID: 7368869623509241161}
-  - component: {fileID: 1273857067029811885}
-  - component: {fileID: 374336247524266575}
+  - component: {fileID: 3877177185365756674}
   m_Layer: 0
   m_Name: lasergun10
   m_TagString: Untagged
@@ -3855,6 +3371,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.70271313, w: -0.71147335}
   m_LocalPosition: {x: -0.004395554, y: -0.99999034, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 9
@@ -3870,6 +3387,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3910,7 +3428,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1273857067029811885
+--- !u!114 &3877177185365756674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3919,30 +3437,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7039915951327025649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 8196575000261846867}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &374336247524266575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7039915951327025649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &7388008434697412010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3970,6 +3470,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 249843030675988017}
   - {fileID: 6218042045063184178}
@@ -3997,7 +3498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaf9f22c95556e4fbba335fbcf524dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootCount: 15
 --- !u!1 &7619574889301304863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,8 +3508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7161425994926527566}
   - component: {fileID: 8658490698713585902}
-  - component: {fileID: 4147139726275621562}
-  - component: {fileID: 4452217057241323066}
+  - component: {fileID: 4508762003092461327}
   m_Layer: 0
   m_Name: lasergun8
   m_TagString: Untagged
@@ -4027,6 +3526,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.7918381, w: -0.6107311}
   m_LocalPosition: {x: -0.24956931, y: 0.96835697, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3254767928182803214}
   m_RootOrder: 7
@@ -4042,6 +3542,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4082,7 +3583,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4147139726275621562
+--- !u!114 &4508762003092461327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4091,30 +3592,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7619574889301304863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 7161425994926527566}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &4452217057241323066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7619574889301304863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &8147967292997883031
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,8 +3608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1784134283178762674}
   - component: {fileID: 7937180809771086299}
-  - component: {fileID: 4350206607629542631}
-  - component: {fileID: 8978826291154590113}
+  - component: {fileID: 2693098237962114664}
   m_Layer: 0
   m_Name: lasergun11
   m_TagString: Untagged
@@ -4144,6 +3626,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.32267693, w: -0.9465092}
   m_LocalPosition: {x: 0.7597075, y: -0.6502649, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 10
@@ -4159,6 +3642,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4199,7 +3683,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4350206607629542631
+--- !u!114 &2693098237962114664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4208,30 +3692,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8147967292997883031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 1784134283178762674}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &8978826291154590113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147967292997883031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &8259085844595285554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,6 +3724,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8607630707751887509}
   m_RootOrder: 5
@@ -4272,8 +3739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3444170336195827491}
   - component: {fileID: 7292121128744073777}
-  - component: {fileID: 3634891736093307410}
-  - component: {fileID: 1554452636651419284}
+  - component: {fileID: 8913532540547322477}
   m_Layer: 0
   m_Name: lasergun9
   m_TagString: Untagged
@@ -4291,6 +3757,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.97576934, w: -0.21880205}
   m_LocalPosition: {x: -0.89988, y: 0.43613762, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976880663410892806}
   m_RootOrder: 8
@@ -4306,6 +3773,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4346,7 +3814,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3634891736093307410
+--- !u!114 &8913532540547322477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4355,30 +3823,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8499787250957901895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c614b77cef6b49b223aae5a002db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d09898c9b1cf95647a8d8909413dfcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Firepoint: {fileID: 3444170336195827491}
-  Ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
-  IsShooting: 1
-  IsBoss: 1
-  boss: {fileID: 9209209272937837667}
-  weaponStats: {fileID: 0}
-  shootCount: 0
---- !u!114 &1554452636651419284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8499787250957901895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 0.1
+  _firepoint: {fileID: 0}
+  _ammo: {fileID: 3281858374423512881, guid: 9104faac63a43d04ebcc10ca1e80520c, type: 3}
+  _boss: {fileID: 9209209272937837667}
 --- !u!1 &9209209272937837667
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,9 +3847,14 @@ GameObject:
   - component: {fileID: 4178872635223642165}
   - component: {fileID: 3271528365640423520}
   - component: {fileID: 5048128585335125898}
+  - component: {fileID: 3627740012942121298}
   - component: {fileID: -1427209074196201711}
   - component: {fileID: 4047711659686140745}
-  - component: {fileID: 3627740012942121298}
+  - component: {fileID: 4864597394576757131}
+  - component: {fileID: -8764671019819576562}
+  - component: {fileID: 9046452376117513816}
+  - component: {fileID: 7903982294957131265}
+  - component: {fileID: 5784862813916748607}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -4417,6 +3872,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6262470936092022111}
   - {fileID: 2409420818984360980}
@@ -4444,6 +3900,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4621,15 +4078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a6a085035d25e4887f08a339055675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 1000
   _maxHP: 1000
-  InvFrames: 0.25
-  EnemySprite: {fileID: 0}
-  textColor: {r: 1, g: 1, b: 1, a: 1}
-  textHeight: 0.8
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.5}
-  shadowOffset: {x: 1, y: 1}
-  damageSound: {fileID: 8300000, guid: 2aa5902e33bbb3d4faeb47cd9e969868, type: 3}
+  _teamId: 1
+  _damageSound: {fileID: 8300000, guid: 2aa5902e33bbb3d4faeb47cd9e969868, type: 3}
 --- !u!82 &3271528365640423520
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4738,52 +4189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dd9dd169918ef428f087dd8ea0de38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
---- !u!114 &-1427209074196201711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209209272937837667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 464ca3b4d2583a949a8d7f0eee01a417, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AIPath: {fileID: 4956296180053468401}
-  destinationSetter: {fileID: 2486271276596344477}
-  lasergroup1: {fileID: 1916948309520601658}
-  lasergroup2: {fileID: 7388008434697412010}
-  lasergroup3: {fileID: 6552388929423493540}
-  FirstStageAtackKD: 5
-  TurboSpeed: 5
-  NormalSpeed: 1
-  shield: {fileID: 1333207683600541231}
-  SecondStageWaitingOnPoint: 3
-  distanseNoFlySpawn: 4
-  minFlySpawn: 5
-  fly: {fileID: 3465465622681761255, guid: 487129b875933134c9d2c886b8d90944, type: 3}
-  SecondStageController: {fileID: 0}
-  runningAwayDistance: 4.5
-  Animator: {fileID: 0}
---- !u!114 &4047711659686140745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209209272937837667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 10
-  ReloadTime: 1
+  _damage: 10
+  _teamId: 1
 --- !u!95 &3627740012942121298
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4796,7 +4206,115 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1427209074196201711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464ca3b4d2583a949a8d7f0eee01a417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laserGroup1: {fileID: 1916948309520601658}
+  _laserGroup2: {fileID: 7388008434697412010}
+  _laserGroup3: {fileID: 6552388929423493540}
+  _firstStageAtackKD: 5
+  _turboSpeed: 5
+  _normalSpeed: 1
+  _shield: {fileID: 1333207683600541231}
+  _secondStageWaitingOnPoint: 3
+  _distanseNoFlySpawn: 4
+  _minFlySpawn: 5
+  _fly: {fileID: 0}
+  _runningAwayDistance: 4.5
+--- !u!114 &4047711659686140745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce72958e221e89e45a12a3a7617122af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _reloadTime: 1
+--- !u!114 &4864597394576757131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c70d815470295e46bae8748ec11b477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aIDestinationSetter: {fileID: 2486271276596344477}
+  _patroolPoints: []
+--- !u!114 &-8764671019819576562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6f31d0121f9cf46b966db908c4d7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectToDelete: {fileID: 9209209272937837667}
+--- !u!114 &9046452376117513816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b598534919cf843861f3e29080129d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _textHeight: 0.8
+--- !u!114 &7903982294957131265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5990fc404a8db3541a626de272f90c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _damagedColor: {r: 1, g: 0, b: 0, a: 1}
+  _invFrames: 1
+--- !u!114 &5784862813916748607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209209272937837667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef5ec38230779b438ce26ed2da7b53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectToDestroy: {fileID: 9209209272937837667}

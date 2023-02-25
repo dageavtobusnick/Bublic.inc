@@ -1,225 +1,100 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float Speed = 5f;
-	public float DashCD = 1f;
-	public float DashSpeed = 1;
-	public float DashTime = 1.0f;
-	public Transform _holdP;
-	private Vector2 movementVector;
-    private Direction direction;
-    private Rigidbody2D rb;
-	private float _currentCD = 0;
-	private Animator animator;
-	public MeleeWeapon Weapon;
-	private bool _isDashing;
-	public int Score;
-	public AudioClip coinsSound;
-	public Collider2D Hitbox;
-	public SpriteRenderer PlayerSprite;
+	[SerializeField]
+	private float _speed = 5f;
+    [SerializeField]
+    private float _dashCD = 1f;
+    [SerializeField]
+    private float _dashSpeed = 1;
+    [SerializeField]
+    private float _dashTime = 1.0f;
+    [SerializeField]
+    private AudioClip _coinsSound;
+    [SerializeField]
+    private Collider2D _hitbox;
 
-	void Start()
+	private bool _isDashing;
+    private Rigidbody2D _rb;
+    private float _currentCD = 0;
+    private Animator _animator;
+	private SpriteRenderer _playerSprite;
+
+    public float Speed { get => _speed; set => _speed = value; }
+
+    public event Action OnCoinTake;
+
+    void Start()
 	{
-		PlayerSprite = GetComponent<SpriteRenderer>();
-		Hitbox = GetComponent<BoxCollider2D>();
-		rb = GetComponent<Rigidbody2D>();
-		animator = GetComponent<Animator>();
-		rb.freezeRotation = true;
-		rb.gravityScale = 0;
+		_playerSprite = GetComponent<SpriteRenderer>();
+		_hitbox = GetComponent<BoxCollider2D>();
+		_rb = GetComponent<Rigidbody2D>();
+		_animator = GetComponent<Animator>();
+		_rb.freezeRotation = true;
+		_rb.gravityScale = 0;
+		GameController.PlayerInputActions.Dash += OnDash;
 	}
 
 	void FixedUpdate()
 	{
-		rb.velocity = Vector2.zero;
-		if (_isDashing)
-		{
-			rb.MovePosition(rb.position + movementVector * DashSpeed * Time.fixedDeltaTime);
-		}
-		else
-		{
-			rb.MovePosition(rb.position + movementVector * Speed * Time.fixedDeltaTime);
-		}
-
-		Animate();
-	}
+		var move = GameController.PlayerInputActions.Axis;
+		_rb.velocity = move.normalized *( (_isDashing)? _dashSpeed: _speed);
+        SetPlayerDirection();
+    }
 
 	void Update()
 	{
 		if (Time.timeScale == 0f || _isDashing) return;
-
-		movementVector.x = Input.GetAxis("Horizontal");
-		movementVector.y = Input.GetAxis("Vertical");
-
-		if (Weapon)
-			LookAtCursor();
-
-		SetPlayerDirection();
-
-		if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing && _currentCD <= 0)
-		{
-			StartCoroutine(DashCoroutine());
-			_isDashing = true;
-			_currentCD = DashCD;
-		}
-		else
+		if (_currentCD > 0)
 			_currentCD -= Time.deltaTime;
 	}
 
+	public void OnDash()
+	{
+        if ( !_isDashing && _currentCD <= 0)
+        {
+            StartCoroutine(DashCoroutine());
+            _isDashing = true;
+            _currentCD = _dashCD;
+        }
+    }
+
 	private IEnumerator DashCoroutine()
 	{
-		PlayerSprite.color = new Color(1, 1, 1, 0.5f);
-		Hitbox.enabled = false;
+		_playerSprite.color = new Color(1, 1, 1, 0.5f);
+		_hitbox.enabled = false;
 		float startTime = Time.time;
-		while (Time.time < startTime + DashTime)
+		while (Time.time < startTime + _dashTime)
 		{
-			//transform.Translate(_direction * DashSpeed * Time.deltaTime);
-			//rb.MovePosition(rb.position + movementVector * DashSpeed * Time.fixedDeltaTime);
 			yield return null;
 		}
-		PlayerSprite.color = new Color(1, 1, 1, 1f);
-		Hitbox.enabled = true;
+		_playerSprite.color = new Color(1, 1, 1, 1f);
+		_hitbox.enabled = true;
 		_isDashing = false;
 	}
 
-	void LookAtCursor()
-	{
-		Vector3 lookPos = Camera.main.ScreenToWorldPoint(
-			new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-		lookPos -= transform.position;
-		lookPos.z = 0;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            TakeCoin();
+            Destroy(collision.gameObject);
+        }
+    }
 
-		float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-		Weapon.transform.rotation = Quaternion.AngleAxis(angle - Weapon.AngleOffset, Vector3.forward);
-		var desiredPosition = transform.position + lookPos.normalized * Weapon.DistanceOffset;
-		Weapon.transform.position = Vector3.MoveTowards(Weapon.transform.position, desiredPosition, Time.deltaTime * 80f);
-	}
-
-	void Animate()
-	{
-		animator.speed = 1f;
-
-		switch (direction)
-		{
-			case Direction.Up:
-				SetAnimation("PlayerLooksUp");
-				break;
-			case Direction.Down:
-				SetAnimation("PlayerLooksDown");
-				break;
-			case Direction.Right:
-				SetAnimation("PlayerLooksRight");
-				break;
-			case Direction.Left:
-				SetAnimation("PlayerLooksLeft");
-				break;
-			case Direction.UpRight:
-				SetAnimation("PlayerLooksUp");
-				break;
-			case Direction.UpLeft:
-				SetAnimation("PlayerLooksUp");
-				break;
-			case Direction.DownRight:
-				SetAnimation("PlayerLooksDown");
-				break;
-			case Direction.DownLeft:
-				SetAnimation("PlayerLooksDown");
-				break;
-			default:
-				break;
-		}
-
-		////if (movementVector.Equals(Vector2.zero))
-		//{
-		//	animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, 0);
-		//	animator.speed = 0f;
-		//}
-
-		//print(movementVector.ToString() + " " + direction);
-	}
-
-	void SetAnimation(string currentState)
-	{
-		animator.SetBool(currentState, true);
-
-		foreach (var state in new[] { "PlayerLooksUp", "PlayerLooksDown", "PlayerLooksRight", "PlayerLooksLeft" })
-		{
-			if (!state.Equals(currentState))
-				animator.SetBool(state, false);
-		}
-	}
-
-	public delegate void OnCoinTake();
-	public event OnCoinTake onCoinTake;
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Coin"))
-		{
-			TakeCoin();
-			Destroy(collision.gameObject);
-		}
-	}
-
-	private void TakeCoin()
-	{
-		onCoinTake?.Invoke();
-		gameObject.GetComponent<AudioSource>().PlayOneShot(coinsSound);
-	}
+    private void TakeCoin()
+    {
+        OnCoinTake?.Invoke();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(_coinsSound);
+    }
 
 	void SetPlayerDirection()
     {
-		movementVector.Normalize();
-		if (movementVector == Vector2.up)
-		{
-			direction = Direction.Up;
-			return;
-		}
-        if (movementVector == Vector2.down)
-        {
-			direction = Direction.Down;
-			return;
-		}
-        if (movementVector == Vector2.left)
-        {
-			direction = Direction.Left;
-			return;
-		}
-		if (movementVector == Vector2.right)
-		{
-			direction = Direction.Right;
-			return;
-		}
-
-        if (movementVector.x > 0)
-        {
-			if (movementVector.y > 0) 
-			{
-				direction = Direction.UpRight;
-				return;
-			}
-			if (movementVector.y < 0)
-			{
-				direction = Direction.DownRight;
-				return;
-			}
-			return;
-		}
-        if (movementVector.x < 0)
-        {
-			if (movementVector.y > 0)
-			{
-				direction = Direction.UpLeft;
-				return;
-			}
-			if (movementVector.y < 0)
-			{
-				direction = Direction.DownLeft;
-				return;
-			}
-		}
-
-        //print(direction);
+		var movementVector = GameController.PlayerInputActions.Axis.normalized;
+		_animator.SetFloat("X", movementVector.x);
+		_animator.SetFloat("Y", movementVector.y);
     }
 }

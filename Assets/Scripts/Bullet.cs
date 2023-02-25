@@ -1,28 +1,35 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    public float Speed;
+    [HideInInspector]
     public GameObject Owner;
+    [HideInInspector]
     public WeaponStats Weapon;
+    [HideInInspector]
+    public Vector3 Direction;
+    [HideInInspector]
+    public int TeamId;
+
+    [SerializeField]
+    private float _speed;
 
     void Start()
     {
-        var shotDirection = Weapon.gameObject.GetComponent<ShootSystem>().Firepoint.transform.position 
-            - gameObject.transform.position;
-        GetComponent<Rigidbody2D>().velocity = shotDirection * Speed;
+        GetComponent<Rigidbody2D>().velocity = Direction * _speed;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Room") || collision.CompareTag("Exit")||collision.CompareTag("wall"))
+        if(collision==null||collision.gameObject==null||collision.gameObject==Owner) return;
+        if ( collision.CompareTag("Room") || collision.CompareTag("Exit")||collision.CompareTag("wall"))
         {
-            var hpBar = collision.gameObject.GetComponent<HPBar>();
-
-            if (hpBar != null)
-                hpBar.TakeDamage(Weapon.Damage);
-
             Destroy(gameObject);
+        }
+        if (collision.TryGetComponent<IDamagable>(out var hp))
+        {
+            hp.TakeDamage(TeamId, Weapon.Damage);
         }
     }
 }

@@ -111,10 +111,8 @@ public class RoomProperties : MonoBehaviour
 
         foreach (var enemy in Enemies)
         {
-            var shootSystem = enemy.GetComponent<ShootSystem>();
-
-            if (shootSystem != null)
-                shootSystem.Firepoint = GameController.Player.transform;
+            if (TryGetComponent<ShootSystem>(out var shootSystem))
+                shootSystem.SetTargetOnPlayer();
         }
     }
 }

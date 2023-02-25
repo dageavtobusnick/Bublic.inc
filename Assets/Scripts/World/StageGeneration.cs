@@ -17,8 +17,8 @@ public class StageGeneration : MonoBehaviour
     public GameObject RightConnection;
 
     private GameObject[,] RoomsMap;
-    private int mapX;
-    private int mapY;
+    private int _mapX;
+    private int _mapY;
 
     private GameObject roomToSpawn;
     private GameObject lastSpawnedRoom;
@@ -52,20 +52,17 @@ public class StageGeneration : MonoBehaviour
     private void Initialize()
     {
         spawnedRooms = new List<GameObject>();
-
         roomToSpawn = RoomsPrefabs[0];
         lastSpawnedRoom = Instantiate(roomToSpawn, Vector2.zero, Quaternion.identity);
         lastSpawnedRoom.transform.parent = transform;
         spawnedRooms.Add(lastSpawnedRoom);
-
         RoomsMap = new GameObject[RoomsCount * 2 - 1, RoomsCount * 2 - 1];
-        mapX = RoomsCount - 1;
-        mapY = RoomsCount - 1;
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapX = mapX;
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapY = mapY;
-        RoomsMap[mapX, mapY] = lastSpawnedRoom;
-
-        GameController.CurrentRoom = RoomsMap[mapX, mapY].GetComponent<RoomProperties>();
+        _mapX = RoomsCount - 1;
+        _mapY = RoomsCount - 1;
+        lastSpawnedRoom.GetComponent<RoomProperties>().MapX = _mapX;
+        lastSpawnedRoom.GetComponent<RoomProperties>().MapY = _mapY;
+        RoomsMap[_mapX, _mapY] = lastSpawnedRoom;
+        GameController.CurrentRoom = RoomsMap[_mapX, _mapY].GetComponent<RoomProperties>();
     }
 
     private void GenerateStage()
@@ -79,72 +76,57 @@ public class StageGeneration : MonoBehaviour
             }
             else
                 roomToSpawnFrom = spawnedRooms[UnityEngine.Random.Range(0, spawnedRooms.Count)];
-
-            mapX = roomToSpawnFrom.GetComponent<RoomProperties>().MapX;
-            mapY = roomToSpawnFrom.GetComponent<RoomProperties>().MapY;
+            var room = roomToSpawnFrom.GetComponent<RoomProperties>();
+            _mapX = room.MapX;
+            _mapY = room.MapY;
             var possibleDirections = GetPossibleDirections();
-
             if (possibleDirections.Count == 0)
             {
                 spawnedRooms.Remove(roomToSpawnFrom);
                 i--;
                 continue;
             }
-
             var spawnDirection = possibleDirections[UnityEngine.Random.Range(0, possibleDirections.Count)];
-
-            switch (spawnDirection)
-            {
-                case Direction.Up:
-                    {
-                        SpawnRoom(1, 1, 0, 1);
-                        break;
-                    }
-                case Direction.Down:
-                    {
-                        SpawnRoom(-1, -1, 0, -1);
-                        break;
-                    }
-                case Direction.Right:
-                    {
-                        SpawnRoom(1, -1, 1, 0);
-                        break;
-                    }
-                case Direction.Left:
-                    {
-                        SpawnRoom(-1, 1, -1, 0);
-                        break;
-                    }
-                default:
-                    break;
-            }
-
-            RoomsMap[mapX, mapY] = lastSpawnedRoom;
+            var connectionVector = new Vector2Int(Math.Abs(spawnDirection.y) == 1 ? spawnDirection.y : spawnDirection.x,
+                                                Math.Abs(spawnDirection.x) == 1 ? -spawnDirection.x : spawnDirection.y);
+            SelectNextRoom();
+            SpawnRoom(connectionVector,spawnDirection);
+            //switch (spawnDirection)
+            //{
+            //    case Direction.Up:
+            //        {
+            //            SpawnBossRoom(1, 1, 0, 1);
+            //            break;
+            //        }
+            //    case Direction.Down:
+            //        {
+            //            SpawnBossRoom(-1, -1, 0, -1);
+            //            break;
+            //        }
+            //    case Direction.Right:
+            //        {
+            //            SpawnBossRoom(1, -1, 1, 0);
+            //            break;
+            //        }
+            //    case Direction.Left:
+            //        {
+            //            SpawnBossRoom(-1, 1, -1, 0);
+            //            break;
+            //        }
+            //    default:
+            //        break;
+            //}
+            RoomsMap[_mapX, _mapY] = lastSpawnedRoom;
             lastSpawnedRoom.transform.parent = transform;
             spawnedRooms.Add(lastSpawnedRoom);
         }
     }
 
-    private void SpawnRoom(int xSign, int ySign, int mapDX, int mapDY)
+    private void SelectNextRoom()
     {
         roomToSpawn = spawnShop ? ShopRoom : RoomsPrefabs[UnityEngine.Random.Range(1, RoomsPrefabs.Count)];
-
-        if(!WithRepetitions)
+        if (!WithRepetitions)
             RoomsPrefabs.Remove(roomToSpawn);
-
-        var maxRoomSize = System.Math.Max(roomToSpawn.GetComponent<RoomProperties>().Size,
-            roomToSpawnFrom.GetComponent<RoomProperties>().Size);
-        var roomDX = maxRoomSize - RoomsDensity;
-        var roomDY = roomDX / 2;
-
-        lastSpawnedRoom = Instantiate(roomToSpawn, new Vector3(roomToSpawnFrom.transform.position.x + roomDX * xSign,
-        roomToSpawnFrom.transform.position.y + roomDY * ySign, 0), Quaternion.identity);
-        GenerateAiNet();
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapX = roomToSpawnFrom.GetComponent<RoomProperties>().MapX + mapDX;
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapY = roomToSpawnFrom.GetComponent<RoomProperties>().MapY + mapDY;
-        mapX += mapDX;
-        mapY += mapDY;
-        MakeConnection(xSign, ySign, maxRoomSize);
     }
 
     public void GenerateBossRoom()
@@ -157,8 +139,9 @@ public class StageGeneration : MonoBehaviour
         foreach (var room in spawnedRooms)
         {
             var distance = 0;
-            distance += System.Math.Abs(room.GetComponent<RoomProperties>().MapX - mapX);
-            distance += System.Math.Abs(room.GetComponent<RoomProperties>().MapY - mapY);
+            var roomData = room.GetComponent<RoomProperties>();
+            distance += Math.Abs(roomData.MapX - mapX);
+            distance += Math.Abs(roomData.MapY - mapY);
             roomsWithDistance.Add(room, distance);
 
             if (distance > maxDistance)
@@ -170,12 +153,13 @@ public class StageGeneration : MonoBehaviour
             if (room.Value == maxDistance)
                 distantRooms.Add(room.Key);
 
-        var possibleDirections = new List<Direction>();
+        var possibleDirections = new List<Vector2Int>();
         for (int i = 0; i < distantRooms.Count; i++)
         {
             roomToSpawnFrom = distantRooms[UnityEngine.Random.Range(0, distantRooms.Count)];
-            this.mapX = roomToSpawnFrom.GetComponent<RoomProperties>().MapX;
-            this.mapY = roomToSpawnFrom.GetComponent<RoomProperties>().MapY;
+            var roomFrom = roomToSpawnFrom.GetComponent<RoomProperties>();
+            _mapX = roomFrom.MapX;
+            _mapY = roomFrom.MapY;
             possibleDirections = GetPossibleDirections();
 
             if (possibleDirections.Count == 0)
@@ -188,54 +172,36 @@ public class StageGeneration : MonoBehaviour
         }
 
         var spawnDirection = possibleDirections[UnityEngine.Random.Range(0, possibleDirections.Count)];
-
-        switch (spawnDirection)
-        {
-            case Direction.Up:
-                {
-                    SpawnBossRoom(1, 1, 0, 1);
-                    break;
-                }
-            case Direction.Down:
-                {
-                    SpawnBossRoom(-1, -1, 0, -1);
-                    break;
-                }
-            case Direction.Right:
-                {
-                    SpawnBossRoom(1, -1, 1, 0);
-                    break;
-                }
-            case Direction.Left:
-                {
-                    SpawnBossRoom(-1, 1, -1, 0);
-                    break;
-                }
-            default:
-                break;
-        }
-
+        var connectionVector = GetConnectionVector(spawnDirection);
+        roomToSpawn = BossRoom;
+        SpawnRoom(connectionVector, spawnDirection);
         RoomsMap[mapX, mapY] = lastSpawnedRoom;
         lastSpawnedRoom.transform.parent = transform;
         spawnedRooms.Add(lastSpawnedRoom);
     }
 
-    private void SpawnBossRoom(int xSign, int ySign, int mapDX, int mapDY)
+    private static Vector2Int GetConnectionVector(Vector2Int spawnDirection)
     {
-        roomToSpawn = BossRoom;
-        var maxRoomSize = System.Math.Max(roomToSpawn.GetComponent<RoomProperties>().Size,
+        return new Vector2Int(Math.Abs(spawnDirection.y) == 1 ? spawnDirection.y : 0,
+                                                        Math.Abs(spawnDirection.x) == 1 ? -spawnDirection.x : 0);
+    }
+
+    private void SpawnRoom(Vector2Int connectionVector, Vector2Int vector)
+    {
+        var maxRoomSize = Math.Max(roomToSpawn.GetComponent<RoomProperties>().Size,
             roomToSpawnFrom.GetComponent<RoomProperties>().Size);
         var roomDX = maxRoomSize - RoomsDensity;
         var roomDY = roomDX / 2;
-
-        lastSpawnedRoom = Instantiate(roomToSpawn, new Vector3(roomToSpawnFrom.transform.position.x + roomDX * xSign,
-        roomToSpawnFrom.transform.position.y + roomDY * ySign, 0), Quaternion.identity);
+        lastSpawnedRoom = Instantiate(roomToSpawn, new Vector3(roomToSpawnFrom.transform.position.x + roomDX * connectionVector.x,
+        roomToSpawnFrom.transform.position.y + roomDY * connectionVector.y, 0), Quaternion.identity);
         GenerateAiNet();
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapX = roomToSpawnFrom.GetComponent<RoomProperties>().MapX + mapDX;
-        lastSpawnedRoom.GetComponent<RoomProperties>().MapY = roomToSpawnFrom.GetComponent<RoomProperties>().MapY + mapDY;
-        mapX += mapDX;
-        mapY += mapDY;
-        MakeConnection(xSign, ySign, maxRoomSize);
+        var lastRoom = lastSpawnedRoom.GetComponent<RoomProperties>();
+        var spawnedRoom = roomToSpawnFrom.GetComponent<RoomProperties>();
+        lastRoom.MapX = spawnedRoom.MapX + vector.x;
+        lastRoom.MapY = spawnedRoom.MapY + vector.y;
+        _mapX += vector.x;
+        _mapY += vector.y;
+        MakeConnection(connectionVector, maxRoomSize);
     }
 
     private void GenerateAiNet()
@@ -249,70 +215,66 @@ public class StageGeneration : MonoBehaviour
         grid.rotation = new Vector3(45, 270, 270);
         var position = lastSpawnedRoom.transform.position;
         grid.center = new Vector3(position.x, position.y + 0.244f, position.z);
-        var size = roomToSpawn.GetComponent<AISize>();
-        if (size!=null)
+        if (TryGetComponent<AISize>(out var size))
             grid.SetDimensions(size.size * (int)Math.Ceiling(1 / grid.nodeSize), size.size * (int)Math.Ceiling(1 / grid.nodeSize), grid.nodeSize);
     }
 
-    private void MakeConnection(int xSign, int ySign, float maxRoomSize)
+    private void MakeConnection(Vector2Int connectionVector, float maxRoomSize)
     {
-        var minRoomSize = System.Math.Min(roomToSpawn.GetComponent<RoomProperties>().Size,
+        var minRoomSize = Math.Min(roomToSpawn.GetComponent<RoomProperties>().Size,
             roomToSpawnFrom.GetComponent<RoomProperties>().Size);
         var roomSize = roomToSpawnFrom.GetComponent<RoomProperties>().Size;
-        var connectionX = roomToSpawnFrom.transform.position.x + (roomSize / 2 - (roomSize - 2) / 4) * xSign;
-        var connectionY = roomToSpawnFrom.transform.position.y + (roomSize / 2 - (roomSize - 2) / 4) / 2 * ySign;
+        var connectionX = roomToSpawnFrom.transform.position.x + 
+                          (roomSize / 2 - (roomSize - 2) / 4) * connectionVector.x;
+        var connectionY = roomToSpawnFrom.transform.position.y + 
+                          (roomSize / 2 - (roomSize - 2) / 4) / 2 * connectionVector.y;
 
         var connectionLength = maxRoomSize + (maxRoomSize - minRoomSize) / 2 - 1 - RoomsDensity * 2;
         for (int connectionsCount = 0; connectionsCount < connectionLength; connectionsCount++)
         {
-            var connectionToSpawn = xSign * ySign == 1 ? RightConnection : LeftConnection;
+            var connectionToSpawn = connectionVector.x * connectionVector.y == 1 ? 
+                                    RightConnection :
+                                    LeftConnection;
             var connectionPart = Instantiate(connectionToSpawn, new Vector3(connectionX, connectionY, 0), Quaternion.identity);
             connectionPart.transform.parent = transform;
-            connectionX += 0.5f * xSign;
-            connectionY += 0.25f * ySign;
+            connectionX += 0.5f * connectionVector.x;
+            connectionY += 0.25f * connectionVector.y;
         }
-
-        switch ((xSign, ySign))
+        var fromRoom = roomToSpawnFrom.GetComponent<RoomProperties>();
+        var lastRoom = lastSpawnedRoom.GetComponent<RoomProperties>();
+        switch ((connectionVector.x, connectionVector.y))
         {
             case (1, 1):
-                roomToSpawnFrom.GetComponent<RoomProperties>().SpawnExit(Direction.Up);
-                lastSpawnedRoom.GetComponent<RoomProperties>().SpawnExit(Direction.Down);
+                fromRoom.SpawnExit(Direction.Up);
+                lastRoom.SpawnExit(Direction.Down);
                 break;
             case (-1, -1):
-                roomToSpawnFrom.GetComponent<RoomProperties>().SpawnExit(Direction.Down);
-                lastSpawnedRoom.GetComponent<RoomProperties>().SpawnExit(Direction.Up);
+                fromRoom.SpawnExit(Direction.Down);
+                lastRoom.SpawnExit(Direction.Up);
                 break;
             case (1, -1):
-                roomToSpawnFrom.GetComponent<RoomProperties>().SpawnExit(Direction.Right);
-                lastSpawnedRoom.GetComponent<RoomProperties>().SpawnExit(Direction.Left);
+                fromRoom.SpawnExit(Direction.Right);
+                lastRoom.SpawnExit(Direction.Left);
                 break;
             case (-1, 1):
-                roomToSpawnFrom.GetComponent<RoomProperties>().SpawnExit(Direction.Left);
-                lastSpawnedRoom.GetComponent<RoomProperties>().SpawnExit(Direction.Right);
+                fromRoom.SpawnExit(Direction.Left);
+                lastRoom.SpawnExit(Direction.Right);
                 break;
         }
     }
 
-    private List<Direction> GetPossibleDirections()
+    private List<Vector2Int> GetPossibleDirections()
     {
-        var possibleDirections = new List<Direction>();
+        var possibleDirections = new List<Vector2Int>();
         for (int x = -1; x <= 1; x++)
             for (int y = -1; y <= 1; y++)
             {
                 if (x * y != 0) continue;
-                if (RoomsMap[mapX + x, mapY + y] == null)
+                if (RoomsMap[_mapX + x, _mapY + y] == null)
                 {
-                    if (y == 1)
-                        possibleDirections.Add(Direction.Up);
-                    else if (y == -1)
-                        possibleDirections.Add(Direction.Down);
-                    else if (x == 1)
-                        possibleDirections.Add(Direction.Right);
-                    else if (x == -1)
-                        possibleDirections.Add(Direction.Left);
+                    possibleDirections.Add(new Vector2Int(x, y));
                 }
             }
-
         return possibleDirections;
     }
 }

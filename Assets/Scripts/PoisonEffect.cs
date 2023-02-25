@@ -3,37 +3,36 @@ using UnityEngine;
 
 public class PoisonEffect : MonoBehaviour
 {
-    public int Ticks;
-    public int TickDamage;
-    [SerializeField]private int TimeBetweenTicksInSeconds;
+    [SerializeField]
+    private int _ticks;
+    [SerializeField]
+    private int _tickDamage;
+    [SerializeField]
+    private int _timeBetweenTicksInSeconds;
 
-    private HPBar hpBar;
-    private bool poisonInflicted;
+    private HPBar _hP;
+    private bool _poisonInflicted;
 
     void Start()
     {
-        hpBar = FindObjectOfType<HPBar>();
+        _hP = FindObjectOfType<HPBar>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger && !poisonInflicted)
-            StartCoroutine("InflictPoison");
+        if (collision.TryGetComponent<PlayerController>(out var _) && !collision.isTrigger && !_poisonInflicted)
+            StartCoroutine(InflictPoison());
     }
 
     IEnumerator InflictPoison()
     {
-        print("Poison Inflicted");
-        poisonInflicted = true;
-        for (int i = 0; i < Ticks - 1; i++)
+        _poisonInflicted = true;
+        for (int i = 0; i < _ticks - 1; i++)
         {
-            print("Took Poison Damage");
-            hpBar.TakeDamage(TickDamage);
-            yield return new WaitForSeconds(TimeBetweenTicksInSeconds);
+            _hP.TakeDamage(GameController.VirtualTeamId,_tickDamage);
+            yield return new WaitForSeconds(_timeBetweenTicksInSeconds);
         }
-        print("Took Poison Damage");
-        hpBar.TakeDamage(TickDamage);
-        print("Poison Weared Off");
-        poisonInflicted = false;
+        _hP.TakeDamage(GameController.UndeadId, _tickDamage);
+        _poisonInflicted = false;
     }
 }

@@ -1,29 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsMove : MonoBehaviour
 {
-    public float time=0;
-    public float amp=0.05f;
-    public float freq=2; //частота
-    public float offset=0; //смещение
-    private Vector2 startPos;
-    public bool isPicked = false;
+    [SerializeField]
+    private float _amp=0.05f;
+    [SerializeField]
+    private float _freq=2;
+
+    private bool _isPicked = false;
+    private Vector2 _startPos;
+    private float _time = 0;
+    private float _offset = 0;
+
+    private Transform _transform;
     void Start()
     {
-        startPos = transform.position;
+        _transform = transform;
+        _startPos = _transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PickUp()
     {
+        _isPicked = true;
+    }
 
-        if (!isPicked)
+    void FixedUpdate()
+    {
+        if (!_isPicked)
         {
-                time += Time.deltaTime;
-                offset = amp * Mathf.Sin(time * freq);
-                transform.position = startPos + new Vector2(0, offset);
+            _time += Time.fixedDeltaTime;
+            _offset = _amp * Mathf.Sin(_time * _freq);
+            _transform.position = _startPos + new Vector2(0, _offset);
         }
     }
 }

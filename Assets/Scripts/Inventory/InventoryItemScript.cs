@@ -1,66 +1,94 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static InventoryScript;
+using UnityEngine.UI;
 
-public class InventoryItemScript : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IEndDragHandler,IDragHandler,IDropHandler
+[RequireComponent(typeof(WeaponUIItem))]
+[RequireComponent(typeof(ModuleUIItem))]
+public class InventoryItemScript : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
-    private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-    private Vector2 oldPosition;
-    public InventoryItem inventoryItem;
-    [SerializeField] private Canvas canvas;
+    [SerializeField]
+    private Canvas _canvas;
+
+    private RectTransform _rectTransform;
+    private CanvasGroup _canvasGroup;
+    private ItemScript _item;
+    private Image _image;
+    private Vector2 _oldPosition;
+    private bool _needEquipement;
+
+    public bool IsEmpty { get => _item == null;}
+    public ItemScript Item { get => _item;}
+
+    public event Action<ItemScript> Equip;
+    public event Action<ItemScript> Deequip;
+
+    void Start()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _image = GetComponent<Image>();
+    }
+
+    public void NeedEquipement()
+    {
+        _needEquipement = true;
+    }
+
+    public ItemScript RemoveItem()
+    {
+        var item=_item;
+        _item = null;
+        _image.sprite=null;
+        _image.enabled=false;
+        if (_needEquipement)
+            Deequip?.Invoke(item);
+        return item;
+    }
+
+    public ItemScript Replace(ItemScript item)
+    {
+        var oldItem = RemoveItem();
+        AddItem(item);
+        return oldItem;
+    }
+
+    public bool IsWeapon()
+    {
+        return (_item != null) && _item.TryGetComponent<MeleeWeapon>(out var _);
+    }
+    public bool IsModule()
+    {
+        return (_item != null) && _item.TryGetComponent<ModuleScript>(out var _);
+    }
+
+
+    public void AddItem(ItemScript item)
+    {
+        _item=item;
+        _image.sprite=item?.InventoryItem?.Icon;
+        _image.enabled=item!=null;
+        if(_needEquipement)
+            Equip?.Invoke(item);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = false;
-        GameObject.Find("Inventory").GetComponent<InventoryScript>().StartMoveItem(inventoryItem);
-        canvasGroup.alpha = .6f;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.alpha = .6f;
+        _oldPosition = _rectTransform.anchoredPosition;
     }
-    public void SavePosition()
-    {
-        var newPosition = rectTransform.anchoredPosition;
-        oldPosition = new Vector2(newPosition.x, newPosition.y);
-    }
-    public void ReturnPosition()
-    {
-        rectTransform.anchoredPosition = oldPosition;
-    }
+
+
     public void OnDrag(PointerEventData eventData)
     {
-
-        rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        
+        _rectTransform.anchoredPosition += eventData.delta/_canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.alpha = 1f;
-        ReturnPosition();
-        GameObject.Find("Inventory").GetComponent<InventoryScript>().EndMoveItem();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rectTransform = gameObject.GetComponent<RectTransform>();
-        canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        SavePosition();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.alpha = 1f;
+        _rectTransform.anchoredPosition = _oldPosition;
     }
 }

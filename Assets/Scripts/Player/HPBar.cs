@@ -1,81 +1,61 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System;
 
-public class HPBar : MonoBehaviour
+[RequireComponent(typeof(GUIBar))]
+[RequireComponent(typeof(ColorController))]
+public class HPBar : MonoBehaviour,IDamagable,IHealable,IEntity
 {
-    [SerializeField] private Slider _slider;
-    //[SerializeField] private Gradient _gradient;
-    [SerializeField] private Image _fill;
 
-    public int _currentHP;
-    public int _maxHP;
-    private float _currentInvTime;
+    [SerializeField]
+    private AudioClip _playerDamage;
+    [SerializeField]
+    private int _maxHP;
+    [SerializeField]
+    private int _teamId;
 
-    public Color TextColor = Color.white;
-    public float TextHeight = 0.8f;
-    public Color ShadowColor = new Color(0, 0, 0, 0.5f);
-    public Vector2 ShadowOffset = new Vector2(1, 1);
-    public AudioClip PlayerDamage;
-    public float InvFrames;
-    public SpriteRenderer PlayerSprite;
+    private int _currentHP;
+    private bool _canBeDamaged=true;
+    private AudioSource _playerAudioSource;
 
-    GUIStyle style = new GUIStyle();
-
-    void OnGUI()
-    {
-        GUI.depth = 9999;
-
-        style.normal.textColor = TextColor;
-
-        Vector3 worldPosition = new Vector3(transform.position.x, transform.position.y + TextHeight, transform.position.z);
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-        screenPosition.y = Screen.height - screenPosition.y;
-
-        GUI.Label(new Rect(screenPosition.x, screenPosition.y, 0, 0), _currentHP.ToString(), style);
-    }
+    public event Action Dead;
+    public event Action Damaged;
+    public event Action<float> HPChanged;
+    public int CurrentHp { get => _currentHP; }
+    public int MaxHp{ get => _maxHP;}
+    public int TeamId { get => _teamId; }
 
     private void Start()
     {
-        _slider.maxValue = _maxHP;
-        _slider.value = _currentHP;
-        //_fill.color = _gradient.Evaluate(1f);
-        PlayerSprite.color = Color.white;
+        _currentHP = _maxHP;
+        HPChanged?.Invoke(_currentHP);
+        _playerAudioSource = GetComponent<AudioSource>();
+        Dead += GameController.ReloadWorld;
+        GetComponent<ColorController>().NotInv += () =>
+        {
+            _canBeDamaged = true;
+        };
     }
 
-    private void FixedUpdate()
+    public void TakeDamage(int teamId,int damage)
     {
-        if (_currentInvTime > 0)
+        if (_canBeDamaged&&teamId!=_teamId)
         {
-            _currentInvTime -= Time.fixedDeltaTime;
-
-            if (_currentInvTime <= 0f)
+            if (Time.timeScale == 0f)
             {
-                _currentInvTime = 0f;
-                PlayerSprite.color = Color.white;
+                _currentHP -= damage;
+                if (_currentHP <= 1)
+                    _currentHP = 1;
             }
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (Time.timeScale == 0f)
-        {
-            _currentHP -= damage;
-            if (_currentHP <= 1)
-                _currentHP = 1;
-            _slider.value = _currentHP;
-        }
-        else if (_currentInvTime == 0f)
-        {
-            _currentInvTime = InvFrames;
-            PlayerSprite.color = Color.red;
-            _currentHP -= damage;
-            gameObject.GetComponent<AudioSource>().PlayOneShot(PlayerDamage);
-            if (_currentHP <= 0)
-                Die();
-            _slider.value = _currentHP;
-            //_fill.color = _gradient.Evaluate(_slider.normalizedValue);
+            else
+            {
+                _currentHP -= damage;
+                _playerAudioSource.PlayOneShot(_playerDamage);
+                if (_currentHP <= 0)
+                    Dead?.Invoke();
+            }
+            Damaged?.Invoke();
+            _canBeDamaged = false;
+            HPChanged?.Invoke(_currentHP);
         }
     }
 
@@ -84,12 +64,24 @@ public class HPBar : MonoBehaviour
         _currentHP += heal;
         if (_currentHP > _maxHP)
             _currentHP = _maxHP;
-        _slider.value = _currentHP;
-        //_fill.color = _gradient.Evaluate(_slider.normalizedValue);
+        HPChanged.Invoke(_currentHP);
     }
 
-    public void Die()
+    public void BufHealth(int health)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _maxHP += health;
+        Heal(health);
+    }
+
+    public void DebufHealth(int health)
+    {
+        _maxHP -= health;
+        TakeDamage(GameController.VirtualTeamId,health);
+    }
+
+    public void InitHealth(int hp)
+    {
+        _maxHP = hp;
+        _currentHP=hp;
     }
 }

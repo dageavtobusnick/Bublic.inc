@@ -1,230 +1,265 @@
 using Pathfinding;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BossLogic : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Pathrooling))]
+[RequireComponent(typeof(HP))]
+[RequireComponent (typeof(AIPath))]
+[RequireComponent(typeof (AIDestinationSetter))]
+public class BossLogic : MonoBehaviour,IAttacker
 {
-    public AIPath AIPath;
-    public AIDestinationSetter destinationSetter;
-    public GameObject lasergroup1;
-    public GameObject lasergroup2;
-    public GameObject lasergroup3;
-    public float FirstStageAtackKD;
-    public float TurboSpeed;
-    public float NormalSpeed;
-    public GameObject shield;
-    public float SecondStageWaitingOnPoint;
-    public float distanseNoFlySpawn;
-    public float minFlySpawn;
-    public GameObject fly;
-    public SecondStageController SecondStageController;
-    public float runningAwayDistance;
-    public Animator Animator;
+    [SerializeField]
+    private GameObject _laserGroup1;
+    [SerializeField]
+    private GameObject _laserGroup2;
+    [SerializeField]
+    private GameObject _laserGroup3;
+    [SerializeField]
+    private float _firstStageAtackKD;
+    [SerializeField]
+    private float _turboSpeed;
+    [SerializeField]
+    private float _normalSpeed;
+    [SerializeField]
+    private GameObject _shield;
+    [SerializeField]
+    private float _secondStageWaitingOnPoint;
+    [SerializeField]
+    private float _distanseNoFlySpawn;
+    [SerializeField]
+    private float _minFlySpawn;
+    [SerializeField]
+    private GameObject _fly;
+    [SerializeField]
+    private float _runningAwayDistance;
 
-    private BossStage BossStage = BossStage.Sleep;
-    private BossFirstStage firstStage = BossFirstStage.None;
-    private GameObject[] movingPoints;
-    private GameObject centerPoint;
-    private GameObject player;
-    private GameObject[] flyingPoints;
-    private GameObject[] flySpawnPoint;
-    private BossThirdStage BossThirdStage=BossThirdStage.Atack;
-    private float waitingOnPoint=0;
-    private float FirstStageAtackTime = 0;
-    private bool IsWaitingOnPoint = false;
-    private HP hP;
+    private BossStage _bossStage = BossStage.Sleep;
+    private BossFirstStage _firstStage = BossFirstStage.None;
+    private GameObject _centerPoint;
+    private Transform _player;
+    private GameObject[] _flyingPoints;
+    private GameObject[] _flySpawnPoints;
+    private BossThirdStage _bossThirdStage=BossThirdStage.Atack;
+    private float _waitingOnPoint=0;
+    private float _firstStageAtackTime = 0;
+    private bool _isWaitingOnPoint = false;
+    private HP _hP;
+    private Pathrooling _pathrooling;
+    private Transform _transform;
+    private Animator _animator;
+    private AIPath _aIPath;
+    private AIDestinationSetter _destinationSetter;
+    private SecondStageController _secondStageController;
+    private BossMainShootSystem _lG1System;
+    private BossMainShootSystem _lG2System;
+    private BossMainShootSystem _lG3System;
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
-        movingPoints = GameObject.FindGameObjectsWithTag("bossMovingPoints").Where(x => x.transform.parent.gameObject.GetHashCode() == gameObject.transform.parent.gameObject.GetHashCode()).ToArray(); ;
-        flyingPoints = GameObject.FindGameObjectsWithTag("flypoint").Where(x => x.transform.parent.gameObject.GetHashCode() == gameObject.transform.parent.gameObject.GetHashCode()).ToArray();
-        flySpawnPoint = GameObject.FindGameObjectsWithTag("flyspawn");
-        centerPoint = GameObject.FindGameObjectWithTag("center");
-        hP = gameObject.GetComponent<HP>();
-        player = GameObject.Find("Player");
-        destinationSetter.target = centerPoint.transform;
-        AIPath.canSearch = false;
-        Animator = GetComponent<Animator>();
-        shield.GetComponent<SpriteRenderer>().enabled = false;
-        //var l1 = lasergroup1.GetComponentsInChildren<ShootSystem>();
-        //var l2 = lasergroup2.GetComponentsInChildren<ShootSystem>();
-        //var l3 = lasergroup3.GetComponentsInChildren<ShootSystem>();
-        //foreach(var e in l1)
-        //{
-        //    e.weaponStats = GetComponent<WeaponStats>();
-        //}
-        //foreach (var e in l2)
-        //{
-        //    e.weaponStats = GetComponent<WeaponStats>();
-        //}
-        //foreach (var e in l3)
-        //{
-        //    e.weaponStats = GetComponent<WeaponStats>();
-        //}
+        _transform = GetComponent<Transform>();
+        _pathrooling = GetComponent<Pathrooling>();
+        _aIPath = GetComponent<AIPath>();
+        _destinationSetter= GetComponent<AIDestinationSetter>();
+        _secondStageController = GetComponentInParent<SecondStageController>();
+        _pathrooling.LoadPoint(gameObject.transform.parent.gameObject);
+        _flyingPoints = GameObject.FindGameObjectsWithTag("flypoint").Where(x => x.transform.parent.gameObject == gameObject.transform.parent.gameObject).ToArray();
+        _flySpawnPoints = GameObject.FindGameObjectsWithTag("flyspawn");
+        _centerPoint = GameObject.FindGameObjectWithTag("center");
+        _hP = gameObject.GetComponent<HP>();
+        _player = FindObjectOfType<PlayerController>().transform;
+        _destinationSetter.target = _centerPoint.transform;
+        _aIPath.canSearch = false;
+        _animator = GetComponent<Animator>();
+        _shield.GetComponent<SpriteRenderer>().enabled = false;
+        InitShootSystem(_laserGroup1);
+        InitShootSystem(_laserGroup2);
+        InitShootSystem(_laserGroup3);
+        _lG1System = _laserGroup1.GetComponent<BossMainShootSystem>();
+        _lG2System = _laserGroup2.GetComponent<BossMainShootSystem>();
+        _lG3System = _laserGroup3.GetComponent<BossMainShootSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InitShootSystem(GameObject shootCluster)
+    {
+        var l1 = shootCluster.GetComponentsInChildren<BossShootSystem>();
+
+        foreach (var e in l1)
+        {
+            e.WeaponStats = GetComponent<WeaponStats>();
+        }
+    }
+
+    void FixedUpdate()
     {
         Animate();
         StageCheck();
-        if (BossStage == BossStage.First && AIPath.reachedDestination)
-        {
-            Patroling();
-        }
-        if (BossStage == BossStage.First)
-        {
-            FirstStageAtackTime += Time.deltaTime;
-        }
-        if (FirstStageAtackTime >= FirstStageAtackKD)
-        {
-            FirstStageAtackTime = 0;
-            BossStage = BossStage.FirstStageAtack;
-            lasergroup1.SetActive(true);
-            lasergroup1.GetComponent<BossShootSystem>().StartShooting();
-            destinationSetter.target = centerPoint.transform;
-            AIPath.maxSpeed = TurboSpeed;
-            firstStage = BossFirstStage.First;
-            gameObject.tag = "Untagged";
-            shield.SetActive(true);
-        }
-        if (BossStage == BossStage.FirstStageAtack)
-        {
-            if (!lasergroup1.GetComponent<BossShootSystem>().IsShooting()&&firstStage==BossFirstStage.First)
-            {
-                lasergroup1.SetActive(false);
-                lasergroup2.SetActive(true);
-                lasergroup2.GetComponent<BossShootSystem>().StartShooting();
-                firstStage = BossFirstStage.Second;
-            }
-            if (!lasergroup2.GetComponent<BossShootSystem>().IsShooting() && firstStage == BossFirstStage.Second)
-            {
-                lasergroup2.SetActive(false);
-                lasergroup3.SetActive(true);
-                lasergroup3.GetComponent<BossShootSystem>().StartShooting();
-                firstStage = BossFirstStage.Third;
-            }
-            if (!lasergroup3.GetComponent<BossShootSystem>().IsShooting() && firstStage == BossFirstStage.Third)
-            {
-                lasergroup3.SetActive(false);
-                AIPath.maxSpeed = NormalSpeed;
-                BossStage = BossStage.First;
-                shield.SetActive(false);
-                firstStage = BossFirstStage.None;
-                gameObject.tag = "Enemy";
-            }
+        FirstStage();
+        SecondStage();
+        ThirdStage();
+    }
 
-        }
-        if (BossStage == BossStage.Second&&!IsWaitingOnPoint)
+    private void FirstStage()
+    {
+        if (_bossStage == BossStage.First && _aIPath.reachedDestination)
         {
-            var point= flyingPoints[UnityEngine.Random.Range(0, flyingPoints.Length - 1)];
+              _pathrooling.Patroling();
+        }
+        if (_bossStage == BossStage.First)
+        {
+            _firstStageAtackTime += Time.fixedDeltaTime;
+        }
+        if (_firstStageAtackTime >= _firstStageAtackKD)
+        {
+            _firstStageAtackTime = 0;
+            _bossStage = BossStage.FirstStageAtack;
+            _laserGroup1.SetActive(true);
+            _lG1System.StartShooting();
+            _destinationSetter.target = _centerPoint.transform;
+            _aIPath.maxSpeed = _turboSpeed;
+            _firstStage = BossFirstStage.First;
+            gameObject.tag = "Untagged";
+            _shield.SetActive(true);
+        }
+        if (_bossStage == BossStage.FirstStageAtack)
+        {
+            FirstStageShooterPhase();
+        }
+    }
+
+    private void SecondStage()
+    {
+        if (_bossStage == BossStage.Second && !_isWaitingOnPoint)
+        {
+            var point = _flyingPoints[UnityEngine.Random.Range(0, _flyingPoints.Length - 1)];
             gameObject.transform.position = point.transform.position;
-            destinationSetter.target = point.transform;
-            IsWaitingOnPoint = true;
-            waitingOnPoint = 0;
+            _destinationSetter.target = point.transform;
+            _isWaitingOnPoint = true;
+            _waitingOnPoint = 0;
         }
-        if ( IsWaitingOnPoint&&waitingOnPoint >= SecondStageWaitingOnPoint && BossStage == BossStage.Second)
+        if (_isWaitingOnPoint && _waitingOnPoint >= _secondStageWaitingOnPoint && _bossStage == BossStage.Second)
         {
-            IsWaitingOnPoint = false;
-            if (Math.Abs((player.transform.position - gameObject.transform.position).magnitude) >= distanseNoFlySpawn)
+            _isWaitingOnPoint = false;
+            if (Math.Abs((_player.position - gameObject.transform.position).magnitude) >= _distanseNoFlySpawn)
             {
                 SpawnFly();
-                SecondStageController.StartStage();
+                _secondStageController.StartStage();
                 gameObject.SetActive(false);
             }
         }
         else
         {
-            if(IsWaitingOnPoint && BossStage == BossStage.Second)
+            if (_isWaitingOnPoint && _bossStage == BossStage.Second)
             {
-                waitingOnPoint += Time.deltaTime;
+                _waitingOnPoint += Time.fixedDeltaTime;
             }
         }
-        if(BossStage == BossStage.Third)
+    }
+
+    private void ThirdStage()
+    {
+        if (_bossStage == BossStage.Third)
         {
-            destinationSetter.target = player.transform;
-            AIPath.maxSpeed = TurboSpeed;
+            _destinationSetter.target = _player;
+            _aIPath.maxSpeed = _turboSpeed;
         }
-        if (BossThirdStage==BossThirdStage.Atack && BossStage==BossStage.Third && (player.transform.position - gameObject.transform.position).sqrMagnitude <= runningAwayDistance * runningAwayDistance)
+        if (_bossThirdStage == BossThirdStage.Atack && _bossStage == BossStage.Third && (_player.position - gameObject.transform.position)
+                                                                                      .sqrMagnitude <= _runningAwayDistance * _runningAwayDistance)
         {
-            if (flyingPoints.Length != 0)
-                destinationSetter.target = flyingPoints[UnityEngine.Random.Range(0, flyingPoints.Length)].transform;
-            BossThirdStage = BossThirdStage.MoveToPoint;
-        }else
-        if (BossThirdStage == BossThirdStage.MoveToPoint && BossStage == BossStage.Third && AIPath.reachedEndOfPath)
+            if (_flyingPoints.Length != 0)
+                _destinationSetter.target = _flyingPoints[UnityEngine.Random.Range(0, _flyingPoints.Length)].transform;
+            _bossThirdStage = BossThirdStage.MoveToPoint;
+        }
+        else if (_bossThirdStage == BossThirdStage.MoveToPoint && _bossStage == BossStage.Third && _aIPath.reachedEndOfPath)
         {
-            destinationSetter.target = player.transform;
-            BossThirdStage = BossThirdStage.Atack;
+            _destinationSetter.target = _player;
+            _bossThirdStage = BossThirdStage.Atack;
+        }
+    }
+
+    private void FirstStageShooterPhase()
+    {
+        if (!_lG1System.IsShooting() && _firstStage == BossFirstStage.First)
+        {
+            _laserGroup1.SetActive(false);
+            _laserGroup2.SetActive(true);
+            _lG2System.StartShooting();
+            _firstStage = BossFirstStage.Second;
+        }
+        if (!_lG2System.IsShooting() && _firstStage == BossFirstStage.Second)
+        {
+            _laserGroup2.SetActive(false);
+            _laserGroup3.SetActive(true);
+            _lG3System.StartShooting();
+            _firstStage = BossFirstStage.Third;
+        }
+        if (!_lG3System.IsShooting() && _firstStage == BossFirstStage.Third)
+        {
+            _laserGroup3.SetActive(false);
+            _aIPath.maxSpeed = _normalSpeed;
+            _bossStage = BossStage.First;
+            _shield.SetActive(false);
+            _firstStage = BossFirstStage.None;
+            gameObject.tag = "Enemy";
         }
     }
 
     public void Animate()
     {
         var playerPos = GameController.Player.transform.position;
-
-        Animator.SetBool("LooksRight", false);
-        Animator.SetBool("LooksLeft", false);
-        Animator.SetBool("LooksUp", false);
-        Animator.SetBool("LooksDown", false);
-        Animator.SetBool("Shielded", false);
-
-        if (playerPos.x > transform.position.x)
-            Animator.SetBool("LooksRight", true);
-        else
-            Animator.SetBool("LooksLeft", true);
-
-        if (playerPos.y > transform.position.y)
-            Animator.SetBool("LooksUp", true);
-        else
-            Animator.SetBool("LooksDown", true);
-
-        if (shield.activeInHierarchy)
-            Animator.SetBool("Shielded", true);
+        var enemyPos = _transform.position;
+        var dX = playerPos.x - enemyPos.x;
+        var dY = playerPos.y - enemyPos.y;
+        _animator.SetFloat("dX", dX);
+        _animator.SetFloat("dY", dY);
+        _animator.SetBool("Shielded", _shield.activeInHierarchy);
     }
 
     private void SpawnFly()
     {
-        if (minFlySpawn >= flySpawnPoint.Length)
+        if (_minFlySpawn >= _flySpawnPoints.Length)
             return;
         var count = 0;
-        var spawnFly = UnityEngine.Random.Range(minFlySpawn, flySpawnPoint.Length);
-        foreach (var e in flySpawnPoint)
+        var spawnFly = UnityEngine.Random.Range(_minFlySpawn, _flySpawnPoints.Length);
+        foreach (var e in _flySpawnPoints)
         {
             if (count >= spawnFly)
                 break;
-            var newFly = Instantiate(fly, e.transform.position, Quaternion.identity);
-            newFly.transform.parent = gameObject.transform.parent;
+            var newFly = Instantiate(_fly, e.transform.position, Quaternion.identity);
+            newFly.transform.parent = _transform.parent;
             count++;
         }
     }
 
-    public void Activate()
-    {
-        BossStage = BossStage.First;
-        AIPath.slowWhenNotFacingTarget = false;
-        AIPath.canSearch = true;
-    }
-    private void Patroling()
-    {
-            var target = movingPoints[UnityEngine.Random.Range(0, movingPoints.Length - 1)];
-            destinationSetter.target = target.transform;
-    }
 
     private void StageCheck()
     {
-        var hpPersent = (hP._currentHP*1f / hP._maxHP) * 100;
-        if (hpPersent <= 70 && BossStage == BossStage.First)
+        var hpPersent = (_hP.CurrentHp*1f / _hP.MaxHp) * 100;
+        if (hpPersent <= 70 && _bossStage == BossStage.First)
         {
-            BossStage = BossStage.Second;
+            _bossStage = BossStage.Second;
         }
-        if (hpPersent <= 30 && BossStage == BossStage.Second)
+        if (hpPersent <= 30 && _bossStage == BossStage.Second)
         {
-            BossStage = BossStage.Third;
+            _bossStage = BossStage.Third;
         }
+    }
+
+    public void Attack()
+    {
+        _bossStage = BossStage.First;
+        _aIPath.slowWhenNotFacingTarget = false;
+        _aIPath.canSearch = true;
+    }
+
+    public void StopAttack()
+    {
+        _bossStage = BossStage.Sleep;
+        _aIPath.slowWhenNotFacingTarget = true;
+        _aIPath.canSearch = false;
     }
 }
 public enum BossStage

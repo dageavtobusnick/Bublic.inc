@@ -1,19 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InvSlot : MonoBehaviour,IDropHandler
 {
-    public void OnDrop(PointerEventData eventData)
+    [SerializeField]
+    private InventoryItemScript _item;
+
+    protected void MakeEquipable()
     {
-        if (eventData.pointerDrag != null && GameObject.Find("Inventory").GetComponent<InventoryScript>().isMoving())
+        _item.NeedEquipement();
+    }
+    public virtual void OnDrop(PointerEventData eventData)
+    {
+        if (eventData.pointerDrag != null)
         {
-            var cords = gameObject.name.Split(' ').Select(x => int.Parse(x)).ToArray();
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            eventData.pointerDrag.GetComponent<InventoryItemScript>().SavePosition();
-            GameObject.Find("Inventory").GetComponent<InventoryScript>().MoveToInv(cords[0], cords[1]);
+            var item = eventData.pointerDrag.GetComponent<InventoryItemScript>();
+            if (item != _item)
+            {
+                var t1 = _item.RemoveItem();
+                var t2 = item.Replace(t1);
+                _item.AddItem(t2);
+            }
         }
     }
 }

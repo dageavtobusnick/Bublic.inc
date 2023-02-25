@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -3221576672702893549}
   - component: {fileID: 2997953531943662662}
   - component: {fileID: 1815636430444900618}
+  - component: {fileID: 4943255530072179597}
   m_Layer: 0
   m_Name: SpeedModule
   m_TagString: Untagged
@@ -33,6 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +50,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -126,9 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ebe4aa14909b74d80022043d0dde25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TripletModule: {fileID: 2673632070281621268, guid: 0ccdd80e9a42dc743bea592d2e97143d, type: 3}
-  IsInRange: 0
-  IsPicked: 0
+  _tripletModule: {fileID: 1548671936927663660, guid: 0ccdd80e9a42dc743bea592d2e97143d, type: 3}
 --- !u!114 &6508038853599569916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48042df38ed434f43abe23e134094f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedIncrease: 1
+  _speedIncrease: 1
 --- !u!114 &-3221576672702893549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,13 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6f7729972a714408badfeeb79626b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectName: "\u0420\u0443\u043D\u0430 \u0421\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
-  textSize: 30
-  textFont: {fileID: 12800000, guid: c886f5b69d2b58c41a636ec3ff895383, type: 3}
-  textColor: {r: 1, g: 1, b: 1, a: 1}
-  textHeight: 0.5
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.5}
-  shadowOffset: {x: 1, y: 1}
+  _objectName: "\u0420\u0443\u043D\u0430 \u0421\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
+  _textSize: 30
+  _textFont: {fileID: 12800000, guid: c886f5b69d2b58c41a636ec3ff895383, type: 3}
+  _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _textHeight: 0.8
   _isPicked: 0
 --- !u!114 &2997953531943662662
 MonoBehaviour:
@@ -174,11 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702734aad0cf4694a84da61eb056d47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  amp: 0.05
-  freq: 2
-  offset: 0
-  isPicked: 0
+  _amp: 0.05
+  _freq: 2
 --- !u!114 &1815636430444900618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,9 +188,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryItem:
-    id: 1
-    mainObject: {fileID: 7082579832319015544}
-    icon: {fileID: 21300000, guid: cd39ad59690652a48a592631db1fe636, type: 3}
-    isModule: 1
-    isWeapon: 0
-    isHeal: 0
+    Id: 1
+    MainObject: {fileID: 7082579832319015544}
+    Icon: {fileID: 21300000, guid: cd39ad59690652a48a592631db1fe636, type: 3}
+--- !u!114 &4943255530072179597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082579832319015544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbff01fc6202b449ad3c6f000cf4057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

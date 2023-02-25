@@ -1,30 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponSlot : MonoBehaviour, IDropHandler
+public class WeaponSlot : InvSlot
 {
-    public void OnDrop(PointerEventData eventData)
+    private void Start()
     {
-        Debug.Log("Drop");
-        if (eventData.pointerDrag != null&&eventData.pointerDrag.GetComponent<InventoryItemScript>().inventoryItem.isWeapon && GameObject.Find("Inventory").GetComponent<InventoryScript>().isMoving())
-        {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            eventData.pointerDrag.GetComponent<InventoryItemScript>().SavePosition();
-            GameObject.Find("Inventory").GetComponent<InventoryScript>().MoveToWeaponSlot();
-        }
+        MakeEquipable();
     }
-
-    // Start is called before the first frame update
-    void Start()
+    public override void OnDrop(PointerEventData eventData)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if(eventData.pointerDrag.GetComponent<InventoryItemScript>().IsWeapon())
+            base.OnDrop(eventData);
     }
 }

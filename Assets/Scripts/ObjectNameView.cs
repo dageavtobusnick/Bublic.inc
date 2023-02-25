@@ -1,19 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectNameView : MonoBehaviour
 {
-    public string objectName;
-    private string text;
-    public int textSize;
-    public Font textFont;
-    public Color textColor = Color.white;
-    public float textHeight = 0.8f;
-    public Color shadowColor = new Color(0, 0, 0, 0.5f);
-    public Vector2 shadowOffset = new Vector2(1, 1);
-    [SerializeField] private bool _isPicked;
+    [SerializeField]
+    private string _objectName;
+    [SerializeField]
+    private int _textSize;
+    [SerializeField]
+    private Font _textFont;
+    [SerializeField]
+    private Color _textColor = Color.white;
+    [SerializeField]
+    private float _textHeight = 0.8f;
+    [SerializeField] 
+
+    private bool _isPicked;
+    private string _text;
+    private GUIStyle style;
+
     private void Start()
     {
         if (_isPicked)
@@ -21,29 +26,29 @@ public class ObjectNameView : MonoBehaviour
     }
     private void Awake()
     {
-        text = String.Format("<b>Нажмите \"{0}\" чтобы взять </b><color=#ffea00>{1}</color>", "E", objectName);
+        _text = string.Format("<b>Нажмите \"{0}\" чтобы взять </b><color=#ffea00>{1}</color>", "E", _objectName);
+        GUI.depth = 9999;
+        style = new()
+        {
+            fontSize = _textSize,
+            richText = true,
+            alignment = TextAnchor.MiddleCenter
+        };
+        style.normal.textColor = _textColor;
+        if (_textFont) style.font = _textFont;
     }
     void OnGUI()
     {
-        GUI.depth = 9999;
-
-        GUIStyle style = new GUIStyle();
-        style.fontSize = textSize;
-        style.richText = true;
-        if (textFont) style.font = textFont;
-        style.normal.textColor = textColor;
-        style.alignment = TextAnchor.MiddleCenter;
-
-
-        Vector3 worldPosition = new Vector3(transform.position.x, transform.position.y + textHeight, transform.position.z);
+        Vector3 worldPosition = new(transform.position.x, transform.position.y + _textHeight, transform.position.z);
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
         screenPosition.y = Screen.height - screenPosition.y;
 
-        GUI.Label(new Rect(screenPosition.x, screenPosition.y, 0, 0), text, style);
+        GUI.Label(new Rect(screenPosition.x, screenPosition.y, 0, 0), _text, style);
     }
     public void PickUp()
     {
         enabled = false;
+        _isPicked = true;
     }
 
 
